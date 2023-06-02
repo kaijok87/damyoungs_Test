@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Scenes/Cho_Seung_Geun/Demo_Interior.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
