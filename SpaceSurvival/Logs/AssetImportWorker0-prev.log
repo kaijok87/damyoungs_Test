@@ -1,0 +1,396 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.25f1 (68ef2c4f8861) revision 6876972'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Core' Language: 'ko' Physical Memory: 15755 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.25f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Project_SpaceSurvival/SpaceSurvival
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+55009
+Successfully changed project path to: C:/Project_SpaceSurvival/SpaceSurvival
+C:/Project_SpaceSurvival/SpaceSurvival
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [6792] Host "[IP] 192.168.99.114 [Port] 0 [Flags] 2 [Guid] 636045099 [EditorId] 636045099 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-TJ0337H) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [6792] Host "[IP] 192.168.99.114 [Port] 0 [Flags] 2 [Guid] 636045099 [EditorId] 636045099 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-TJ0337H) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 190.66 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.25f1 (68ef2c4f8861)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Project_SpaceSurvival/SpaceSurvival/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: AMD Radeon(TM) Graphics (ID=0x164c)
+    Vendor:   ATI
+    VRAM:     7877 MB
+    Driver:   30.0.13044.14002
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56980
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.25f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.014345 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 213.43 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.270 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1271ms)
+		BeginReloadAssembly (198ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (893ms)
+			LoadAssemblies (192ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (182ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (59ms)
+			SetupLoadedEditorAssemblies (554ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (17ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (214ms)
+				BeforeProcessingInitializeOnLoad (3ms)
+				ProcessInitializeOnLoadAttributes (238ms)
+				ProcessInitializeOnLoadMethodAttributes (82ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.008684 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Project_SpaceSurvival\SpaceSurvival\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Project_SpaceSurvival\SpaceSurvival\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.97 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.732 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1733ms)
+		BeginReloadAssembly (187ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (9ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (29ms)
+		EndReloadAssembly (1350ms)
+			LoadAssemblies (137ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (453ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (88ms)
+			SetupLoadedEditorAssemblies (614ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (10ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (138ms)
+				ProcessInitializeOnLoadAttributes (414ms)
+				ProcessInitializeOnLoadMethodAttributes (36ms)
+				AfterProcessingInitializeOnLoad (14ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (10ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.09 seconds
+Refreshing native plugins compatible for Editor in 0.99 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3055 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 24 unused Assets / (114.9 KB). Loaded Objects now: 3522.
+Memory consumption went from 114.2 MB to 114.1 MB.
+Total: 4.548700 ms (FindLiveObjects: 0.357500 ms CreateObjectMapping: 0.129200 ms MarkObjects: 3.821900 ms  DeleteObjects: 0.238200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 84521.806740 seconds.
+  path: Assets/Scenes/JY
+  artifactKey: Guid(58fa48f9d0a382544a998daafcbed730) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/JY using Guid(58fa48f9d0a382544a998daafcbed730) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0d0b78c738dd6c5fcb71865279640e0') in 0.018106 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.204308 seconds.
+  path: Assets/PolygonSciFiSpace/Scenes/Demo_Exterior.unity
+  artifactKey: Guid(7dc0f3408c08040458ba7cc777331949) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PolygonSciFiSpace/Scenes/Demo_Exterior.unity using Guid(7dc0f3408c08040458ba7cc777331949) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba2b5f21b54767f72463c6e47cfbd5e4') in 0.016350 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.516709 seconds.
+  path: Assets/PolygonSciFiSpace/Scenes/Demo_Interior.unity
+  artifactKey: Guid(60bc4c0d7fa81944290d3eaf8d44a851) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PolygonSciFiSpace/Scenes/Demo_Interior.unity using Guid(60bc4c0d7fa81944290d3eaf8d44a851) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '726330a8dbc8c580578c3cc6bd4c4071') in 0.014379 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.472884 seconds.
+  path: Assets/PolygonSciFiSpace/Scenes/Demo_Interior 1.unity
+  artifactKey: Guid(ebaf6f4c70004fe4baa3248b3db22036) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PolygonSciFiSpace/Scenes/Demo_Interior 1.unity using Guid(ebaf6f4c70004fe4baa3248b3db22036) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80ea82a8111b9efc79c367143eebe896') in 0.014267 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.327910 seconds.
+  path: Assets/Scenes/SampleScene.unity
+  artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/SampleScene.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f2dbbc1cedfd0107ca1ad38e8220053') in 0.018766 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.266420 seconds.
+  path: Assets/Scenes/Item_Test.unity
+  artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Item_Test.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b5470d8249d1660f6342e45972f06077') in 0.013700 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 21.702243 seconds.
+  path: Assets/PolygonSciFiSpace/Scenes/Demo_InteriorSettings.lighting
+  artifactKey: Guid(ba5146890d21be64386c7ee10185b49f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PolygonSciFiSpace/Scenes/Demo_InteriorSettings.lighting using Guid(ba5146890d21be64386c7ee10185b49f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) LightingSettings: switching bake backend from 1 to 0.
+ -> (artifact id: 'dee9c1d2a4e902c2929cd2b4c144192d') in 0.054905 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.996422 seconds.
+  path: Assets/PolygonSciFiSpace/Scenes/Demo_Interior 1.unity
+  artifactKey: Guid(5edb2ab3277bbb04b8ef93ecc4db3252) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PolygonSciFiSpace/Scenes/Demo_Interior 1.unity using Guid(5edb2ab3277bbb04b8ef93ecc4db3252) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5cf55311e73075d504ad1986642d06ff') in 0.004286 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 47.317085 seconds.
+  path: Assets/Scenes/Cho_Seung_Geun
+  artifactKey: Guid(76405dd6b407d0c4fa9fd709a64e77c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Cho_Seung_Geun using Guid(76405dd6b407d0c4fa9fd709a64e77c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66f23be98adfb74249be75706f863f89') in 0.020290 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 27.517519 seconds.
+  path: Assets/Scenes/JY/Item_Test.unity
+  artifactKey: Guid(5edb2ab3277bbb04b8ef93ecc4db3252) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/JY/Item_Test.unity using Guid(5edb2ab3277bbb04b8ef93ecc4db3252) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea4c1d3d5197fdd9b7e1ad47de897d9a') in 0.005477 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.091681 seconds.
+  path: Assets/Scenes/Cho_Seung_Geun/Demo_Interior.unity
+  artifactKey: Guid(f27c392c5d9fe4f4c96227ca7e625e59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Cho_Seung_Geun/Demo_Interior.unity using Guid(f27c392c5d9fe4f4c96227ca7e625e59) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ec9bd220c3dc4334325dc903ad6e34c') in 0.004602 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 22.120614 seconds.
+  path: Assets/Scenes/JY/Action
+  artifactKey: Guid(e7a7669d01afe8e45b8fca28c8a6bd95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/JY/Action using Guid(e7a7669d01afe8e45b8fca28c8a6bd95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae5efaa0ef5fa9b56890f2c5456de9cc') in 0.013662 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.821427 seconds.
+  path: Assets/Scenes/JY/NewBehaviourScript.cs
+  artifactKey: Guid(11f300ca32b168b43a79e201aa4c714c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/JY/NewBehaviourScript.cs using Guid(11f300ca32b168b43a79e201aa4c714c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e7e7cfcf745e27bc85957ecc3f25ed1') in 0.018384 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008244 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Project_SpaceSurvival\SpaceSurvival\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Project_SpaceSurvival\SpaceSurvival\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.719 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1720ms)
+		BeginReloadAssembly (233ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (10ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (49ms)
+		EndReloadAssembly (1300ms)
+			LoadAssemblies (162ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (486ms)
+			ReleaseScriptCaches (3ms)
+			RebuildScriptCaches (110ms)
+			SetupLoadedEditorAssemblies (491ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (9ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (100ms)
+				ProcessInitializeOnLoadAttributes (337ms)
+				ProcessInitializeOnLoadMethodAttributes (32ms)
+				AfterProcessingInitializeOnLoad (11ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (9ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.53 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3044 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 17 unused Assets / (81.9 KB). Loaded Objects now: 3526.
+Memory consumption went from 113.1 MB to 113.0 MB.
+Total: 4.114600 ms (FindLiveObjects: 0.428900 ms CreateObjectMapping: 0.125800 ms MarkObjects: 3.416500 ms  DeleteObjects: 0.141400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 14.967334 seconds.
+  path: Assets/Scenes/JY/Script
+  artifactKey: Guid(ba72574056eeab446ae9deb4cc8eb6f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/JY/Script using Guid(ba72574056eeab446ae9deb4cc8eb6f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd4f801d96e8e35deefd6513ad2446234') in 0.027154 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 13.164091 seconds.
+  path: Assets/Scenes/JY/Prefab
+  artifactKey: Guid(f2d07d1616ab61f4c925c0c6cf33cacb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/JY/Prefab using Guid(f2d07d1616ab61f4c925c0c6cf33cacb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2a474e98e3c0230785bbdfcb0f1765b3') in 0.015940 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 149.881079 seconds.
+  path: Assets/PolygonSciFiSpace/Prefabs/Characters/SM_Chr_Cryo_Male_01.prefab
+  artifactKey: Guid(1c32930528b792544bdc532593e2114d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PolygonSciFiSpace/Prefabs/Characters/SM_Chr_Cryo_Male_01.prefab using Guid(1c32930528b792544bdc532593e2114d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c04267c9e295ac8244a096a983e64a7') in 0.303417 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 30.628426 seconds.
+  path: Assets/PolygonSciFiSpace/Prefabs/Characters/SM_Chr_Junker_Female_01.prefab
+  artifactKey: Guid(de0e337e502ff3045bd81a5d1d89865b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PolygonSciFiSpace/Prefabs/Characters/SM_Chr_Junker_Female_01.prefab using Guid(de0e337e502ff3045bd81a5d1d89865b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9af5004dad59b71c2558708dabb2cc96') in 0.102508 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.736835 seconds.
+  path: Assets/PolygonSciFiSpace/Prefabs/Characters/SM_Chr_Junker_Male_01.prefab
+  artifactKey: Guid(e76ef83768e6b944daddea1cfb6e9aae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PolygonSciFiSpace/Prefabs/Characters/SM_Chr_Junker_Male_01.prefab using Guid(e76ef83768e6b944daddea1cfb6e9aae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1dba4d6653ae29229d7ea294f44bb0eb') in 0.231822 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 16.490083 seconds.
+  path: Assets/PolygonSciFiSpace/Prefabs/Characters/SM_Chr_Junker_Male_01.prefab
+  artifactKey: Guid(e76ef83768e6b944daddea1cfb6e9aae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PolygonSciFiSpace/Prefabs/Characters/SM_Chr_Junker_Male_01.prefab using Guid(e76ef83768e6b944daddea1cfb6e9aae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47ad9bce14c1a8ef13e32ed202a16d6a') in 0.061704 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.945342 seconds.
+  path: Assets/PolygonSciFiSpace/Prefabs/Characters/SM_Chr_Hunter_Female_01.prefab
+  artifactKey: Guid(1c2d9ecadd9a1cd42842d5cef378188f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PolygonSciFiSpace/Prefabs/Characters/SM_Chr_Hunter_Female_01.prefab using Guid(1c2d9ecadd9a1cd42842d5cef378188f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '40b22c84eeda99c4a704bd2ae186b2c1') in 0.083078 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006389 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Project_SpaceSurvival\SpaceSurvival\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Project_SpaceSurvival\SpaceSurvival\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.01 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.035 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1036ms)
+		BeginReloadAssembly (205ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (6ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (46ms)
+		EndReloadAssembly (701ms)
+			LoadAssemblies (126ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (239ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (41ms)
+			SetupLoadedEditorAssemblies (274ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (93ms)
+				ProcessInitializeOnLoadAttributes (134ms)
+				ProcessInitializeOnLoadMethodAttributes (25ms)
+				AfterProcessingInitializeOnLoad (13ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (10ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.59 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3389 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 18 unused Assets / (81.9 KB). Loaded Objects now: 3878.
+Memory consumption went from 141.7 MB to 141.7 MB.
+Total: 5.007000 ms (FindLiveObjects: 0.414400 ms CreateObjectMapping: 0.118700 ms MarkObjects: 4.102500 ms  DeleteObjects: 0.369300 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
