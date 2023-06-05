@@ -7,7 +7,8 @@ public class Test_Obj : MonoBehaviour
 {
     OpenInput openInput;
     public GameObject inven;
-    bool IsOpen;
+    bool isOpen;
+
     private void Awake()
     {
         openInput = new OpenInput();
@@ -18,17 +19,17 @@ public class Test_Obj : MonoBehaviour
         openInput.Inventory.Open.started += OpenInventory;
     }
 
-    private void OpenInventory(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    public void OpenInventory(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        if (!IsOpen)
+        if (!isOpen)
         {
             inven.SetActive(true);
-            IsOpen = true;
+            isOpen = true;
         }
         else
         {
             inven.SetActive(false);
-            IsOpen = false;
+            isOpen = false;
         }
 
     }
