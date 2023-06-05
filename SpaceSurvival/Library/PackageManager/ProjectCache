@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638213953338770742
+      ticks: 638214016491372809
     m_Hash: 2231750073
   m_LockFileStatus:
     m_FilePath: C:/Project_SpaceSurvival/SpaceSurvival/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638213953338856135
+      ticks: 638214016491372809
     m_Hash: 898710458
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
