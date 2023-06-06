@@ -347,12 +347,15 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
+"Assets/EventBase/Noh/KeyMouseInputSystem.cs"
 "Assets/Scenes/JY/Action/OpenInput.cs"
 "Assets/Scenes/JY/Script/Item_Base.cs"
 "Assets/Scenes/JY/Script/Test_Obj.cs"
+"Assets/Script/Core/Base/Noh/CharcterBaseTest.cs"
 "Assets/Script/Core/Base/SingletonBase.cs"
-"Assets/Script/Core/GameData/MapTestScript.cs"
-"Assets/Script/Noh/MapTest.cs"
+"Assets/Script/Core/GameData/Noh/MapTestScript.cs"
+"Assets/Script/Noh/CameraTest.cs"
+"Assets/Script/Noh/CharcterTest.cs"
 "Assets/Script/Noh/TestScript.cs"
 -langversion:9.0
 
