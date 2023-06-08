@@ -230,6 +230,45 @@ public partial class @KeyMouseInputSystem: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Mouse"",
+            ""id"": ""b347af01-c949-48c7-a495-959dafda4fdc"",
+            ""actions"": [
+                {
+                    ""name"": ""MouseLeft"",
+                    ""type"": ""Value"",
+                    ""id"": ""68a4222f-d8f3-4abc-86ad-6e6def8658fe"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c152ef6e-453f-46b3-97fe-139ff26e1ca5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyMouse"",
+                    ""action"": ""MouseLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c7ca4ee-e6c1-4a22-8af7-244c37eb1c8a"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -258,6 +297,9 @@ public partial class @KeyMouseInputSystem: IInputActionCollection2, IDisposable
         m_Charcter = asset.FindActionMap("Charcter", throwIfNotFound: true);
         m_Charcter_MoveAndUpDown = m_Charcter.FindAction("MoveAndUpDown", throwIfNotFound: true);
         m_Charcter_MoveBooster = m_Charcter.FindAction("MoveBooster", throwIfNotFound: true);
+        // Mouse
+        m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
+        m_Mouse_MouseLeft = m_Mouse.FindAction("MouseLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -415,6 +457,52 @@ public partial class @KeyMouseInputSystem: IInputActionCollection2, IDisposable
         }
     }
     public CharcterActions @Charcter => new CharcterActions(this);
+
+    // Mouse
+    private readonly InputActionMap m_Mouse;
+    private List<IMouseActions> m_MouseActionsCallbackInterfaces = new List<IMouseActions>();
+    private readonly InputAction m_Mouse_MouseLeft;
+    public struct MouseActions
+    {
+        private @KeyMouseInputSystem m_Wrapper;
+        public MouseActions(@KeyMouseInputSystem wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MouseLeft => m_Wrapper.m_Mouse_MouseLeft;
+        public InputActionMap Get() { return m_Wrapper.m_Mouse; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MouseActions set) { return set.Get(); }
+        public void AddCallbacks(IMouseActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MouseActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MouseActionsCallbackInterfaces.Add(instance);
+            @MouseLeft.started += instance.OnMouseLeft;
+            @MouseLeft.performed += instance.OnMouseLeft;
+            @MouseLeft.canceled += instance.OnMouseLeft;
+        }
+
+        private void UnregisterCallbacks(IMouseActions instance)
+        {
+            @MouseLeft.started -= instance.OnMouseLeft;
+            @MouseLeft.performed -= instance.OnMouseLeft;
+            @MouseLeft.canceled -= instance.OnMouseLeft;
+        }
+
+        public void RemoveCallbacks(IMouseActions instance)
+        {
+            if (m_Wrapper.m_MouseActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMouseActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MouseActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MouseActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MouseActions @Mouse => new MouseActions(this);
     private int m_KeyMouseSchemeIndex = -1;
     public InputControlScheme KeyMouseScheme
     {
@@ -432,5 +520,9 @@ public partial class @KeyMouseInputSystem: IInputActionCollection2, IDisposable
     {
         void OnMoveAndUpDown(InputAction.CallbackContext context);
         void OnMoveBooster(InputAction.CallbackContext context);
+    }
+    public interface IMouseActions
+    {
+        void OnMouseLeft(InputAction.CallbackContext context);
     }
 }
