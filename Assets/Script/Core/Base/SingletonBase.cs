@@ -29,7 +29,7 @@ public class SingletonBase<T> : MonoBehaviour where T : Component
             return instance;
         }
     }
-    private void Awake()
+    protected virtual void Awake()
     {
         if (instance == null)
         {
@@ -58,7 +58,7 @@ public class SingletonBase<T> : MonoBehaviour where T : Component
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        OnInitialize();
+        OnInitialize(scene,mode);
     }
 
     
@@ -69,7 +69,7 @@ public class SingletonBase<T> : MonoBehaviour where T : Component
 
 
 
-    protected virtual void OnInitialize()
+    protected virtual void OnInitialize(Scene scene, LoadSceneMode mode)
     {
     }
 }
