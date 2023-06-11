@@ -6,18 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Noh/Test/Ending_Test.unity
-    guid: f0c6797250a7a714fbcfe1261e4f641e
-  - enabled: 1
-    path: Assets/Scenes/Noh/Test/Opening_Test.unity
-    guid: 457742e695b17ed4482fdda74d14e01e
-  - enabled: 1
-    path: Assets/Scenes/Noh/Test/SceanTest1.unity
-    guid: d7e6b599d6296ee4e992d6c09e71ebb2
-  - enabled: 1
     path: Assets/PolygonSciFiSpace/Scenes/Demo_Exterior.unity
     guid: 7dc0f3408c08040458ba7cc777331949
   - enabled: 1
     path: Assets/PolygonSciFiSpace/Scenes/Demo_Interior.unity
     guid: 60bc4c0d7fa81944290d3eaf8d44a851
+  - enabled: 1
+    path: Assets/Scenes/Noh/Ending.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Noh/Loading.unity
+    guid: 8311e4ba36c1e084bbe82bcdb03750ee
+  - enabled: 1
+    path: Assets/Scenes/Noh/Title.unity
+    guid: b4f70ba32e9477e4093f5fb7577254ad
+  - enabled: 1
+    path: Assets/Scenes/Noh/World.unity
+    guid: bbd10048748cb4645ba11533ee73ca4b
   m_configObjects: {}
