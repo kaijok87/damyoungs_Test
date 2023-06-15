@@ -39,6 +39,6 @@ public class OptionsData : SingletonBase<OptionsData>
             AudioSource adTest = new AudioSource();
             
 
-        Component comp;
+        //Component comp;
     }
 }
