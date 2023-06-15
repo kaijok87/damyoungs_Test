@@ -32,19 +32,19 @@ public class TestBase : MonoBehaviour
         inputKeyMouse.Test.Disable();
     }
 
-    protected virtual void Test1(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    protected virtual void Test1(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
     }
-    protected virtual void Test2(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    protected virtual void Test2(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
     }
-    protected virtual void Test3(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    protected virtual void Test3(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
     }
-    protected virtual void Test4(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    protected virtual void Test4(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
     }
-    protected virtual void Test5(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    protected virtual void Test5(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
     }
 }

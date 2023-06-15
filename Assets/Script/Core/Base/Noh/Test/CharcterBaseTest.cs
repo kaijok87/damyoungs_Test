@@ -12,7 +12,7 @@ public class CharcterBaseTest : MonoBehaviour
     [SerializeField]
     Vector3 charcterDistance = Vector3.one;
     public float lerp;
-    float angleValue = 40;
+    //float angleValue = 40;
 
     Vector3 direction = Vector3.zero;
     [SerializeField]
