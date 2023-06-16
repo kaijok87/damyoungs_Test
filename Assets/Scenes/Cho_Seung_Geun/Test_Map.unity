@@ -251,9 +251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4a5209d24e1bd4e90888a2fd96170b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainTile: {fileID: 4016143079225298110, guid: 63b45b9dac6158147ac96b980ceacbb7, type: 3}
-  sizeX: 5
-  sizeY: 3
+  centerTile: {fileID: 1927106134723284363, guid: ec16faef0b0024e41a754becf4fb858e, type: 3}
+  sideTile: {fileID: 8797011225861172393, guid: d7fd6b3f4d9c0734c8f549322c904b1e, type: 3}
   tileCount: 0
 --- !u!1 &1964491307
 GameObject:
