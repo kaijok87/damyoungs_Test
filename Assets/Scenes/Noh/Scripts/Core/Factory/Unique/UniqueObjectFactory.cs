@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 /// <summary>
 /// 한개만 생성되는 객체들이 공통적으로 사용할 클래스 
+/// 공통적으로 처리해야될 로직작성
+/// 이름만 팩토리....Prefab 이라고붙이는게낫았으려나..
 /// </summary>
-public class UniqueObjectFactory : SingletonBase<UniqueObjectFactory>
+public class UniqueObjectFactory : Singleton<UniqueObjectFactory>
 {
 
     /// <summary>
@@ -75,6 +77,7 @@ public class UniqueObjectFactory : SingletonBase<UniqueObjectFactory>
 
     /// <summary>
     /// 로딩끝낫을때 처리할내용 
+    /// 아직 생각안남
     /// </summary>
     /// <param name="scene">현재씬정보</param>
     /// <param name="mode">??</param>

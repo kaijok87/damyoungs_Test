@@ -13,38 +13,31 @@ using System.Text;
 /// </summary>
 public class ClickTest : MonoBehaviour , IPointerClickHandler
 {
-    KeyMouseInputSystem inputSystem;
+    InputKeyMouse inputSystem;
     
     private void Awake()
     {
-        inputSystem = new KeyMouseInputSystem();
+        inputSystem = new InputKeyMouse();
        
     }
     private void OnEnable()
     {
         inputSystem.Enable();
-        //inputSystem.Mouse.MouseClick.performed += OnClickTest;
-        //inputSystem.Mouse.TestClick.performed += OnClickTest;
+        inputSystem.Mouse.MouseClick.performed += OnClickTest;
+        inputSystem.Mouse.TestClick.performed += OnClickTest;
     }
 
     private void OnDisable()
     {
-        //inputSystem.Mouse.TestClick.performed -= OnClickTest;
-        //inputSystem.Mouse.MouseClick.performed -= OnClickTest;
+        inputSystem.Mouse.TestClick.performed -= OnClickTest;
+        inputSystem.Mouse.MouseClick.performed -= OnClickTest;
         inputSystem.Disable();
     }
 
 
-    string filePath = "Assets/ImportPack/SoundFiles";
-    string fileName = "Piano Instrumental 1.wav";
     private void OnClickTest(InputAction.CallbackContext context)
     {
-        string sb = filePath + fileName; 
-        //UIBehaviour testVal = context.ReadValue<UIBehaviour>();
-        if (File.Exists(sb)) {
-            Debug.Log($"{sb} 파일이 존재함");
-        }
-        //Debug.Log(testVal);
+       
 
     }
 
@@ -61,12 +54,12 @@ public class ClickTest : MonoBehaviour , IPointerClickHandler
         {
             if (eventData.pointerEnter.gameObject.name.Equals(EnumList.TitleMenu.NewGame.ToString()))
             {
-                LoadingScean.SceanLoading(EnumList.SceanName.Title);
+              
             }
             else if (eventData.pointerEnter.gameObject.name.Equals(EnumList.TitleMenu.Continue.ToString()))
             {
 
-                LoadingScean.SceanLoading(EnumList.SceanName.Item_Test);
+                LoadingScean.SceanLoading(EnumList.SceanName.World);
 
             }
             else if (eventData.pointerEnter.gameObject.name.Equals(EnumList.TitleMenu.Options.ToString()))

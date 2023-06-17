@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class TestCode : MonoBehaviour
 {
-    KeyMouseInputSystem inputActions;
+    InputKeyMouse inputActions;
 
     private void Awake()
     {
-        inputActions = new KeyMouseInputSystem();
+        inputActions = new InputKeyMouse();
     }
 
     private void OnEnable()

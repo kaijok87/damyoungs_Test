@@ -7,7 +7,7 @@ using UnityEngine;
 /// 해당클래스를 상속받아서 사용 
 /// </summary>
 /// <typeparam name="T">ObjectIsPool을 상속받은 클래스</typeparam>
-public class MultipleObjectPool<T> : SingletonBase<MultipleObjectPool<T>> where T : ObjectIsPool
+public class MultipleObjectPool<T> : MonoBehaviour where T : ObjectIsPool
 {
     /// <summary>
     /// 풀에 담아 놓을 오브젝트의 프리팹
@@ -65,7 +65,6 @@ public class MultipleObjectPool<T> : SingletonBase<MultipleObjectPool<T>> where 
             // 두번째 씬이 불려져서 이미 풀은 만들어져 있는 상황
             foreach (T obj in pool)
             {
-
                 obj.gameObject.SetActive(false);    // 전부 비활성화
             }
         }
@@ -123,7 +122,7 @@ public class MultipleObjectPool<T> : SingletonBase<MultipleObjectPool<T>> where 
         for (int i = start; i < end; i++)    // 새로 만들어진 크기만큼 반복
         {
             //특정위치에 생성하기 기본적으로는 풀아래에 있다.
-             GameObject obj = Instantiate(origianlPrefab, setPosition);
+            GameObject obj = Instantiate(origianlPrefab, setPosition);
             obj.name = $"{origianlPrefab.name}_{i}";            // 이름 구분되도록 설정
 
             T comp = obj.GetComponent<T>();                     // PooledObject 컴포넌트 받아와서

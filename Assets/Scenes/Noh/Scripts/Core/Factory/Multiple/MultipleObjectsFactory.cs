@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-    /// <summary>
-    /// 기본적으로 복수로 생성되는 객체 정의
-    /// </summary>
-    public class MultipleObjectsFactory : SingletonBase<MultipleObjectsFactory>
+/// <summary>
+/// 기본적으로 복수로 생성되는 객체 정의
+/// EnumList.MultipleFactoryObjectList 이곳에 객체추가될내용 같이추가하시면됩니다.
+/// </summary>
+public class MultipleObjectsFactory : Singleton<MultipleObjectsFactory>
     {
      
         /// <summary>

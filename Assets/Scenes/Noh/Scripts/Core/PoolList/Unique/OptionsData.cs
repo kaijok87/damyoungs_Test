@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 옵션창 관리할 싱글톤 아직 제작중이라 정리안됨 일단 소리만나옴
 /// </summary>
-public class OptionsData : SingletonBase<OptionsData>
+public class OptionsData : Singleton<OptionsData>
 {
     /// <summary>
     /// 오디오 안끊기게 가지고다닐변수

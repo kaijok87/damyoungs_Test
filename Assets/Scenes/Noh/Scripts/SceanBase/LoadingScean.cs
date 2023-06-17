@@ -14,6 +14,12 @@ using System;
 public class LoadingScean : MonoBehaviour
 {
     /// <summary>
+    /// 로딩상황을 체크하는변수
+    /// </summary>
+    static bool isLoading = false;
+    public static bool IsLoading => isLoading;
+
+    /// <summary>
     /// 다음씬으로 넘어갈 씬이름
     /// 다음씬이 입력안되면 타이틀로넘어간다.
     /// </summary>
@@ -22,7 +28,7 @@ public class LoadingScean : MonoBehaviour
 
     /// <summary>
     /// 현재 씬이름정보 프로퍼티
-    /// 안쓸거같다.
+    /// 저장할때 써야할거같다.
     /// </summary>
     public static string SceanName => nextSceanName;
 
@@ -63,6 +69,7 @@ public class LoadingScean : MonoBehaviour
     /// </summary>
     void Start()
     {
+        isLoading = true;//로딩시작됬다고 설정
         StopAllCoroutines();//로딩이 연속으로 이러나는경우에 기존코루틴을 멈추고 새로시작한다.
         StartCoroutine(LoadSceanProcess());
     }
@@ -116,6 +123,7 @@ public class LoadingScean : MonoBehaviour
                         if (fakeTimer < loadingTime) //에디터에서 페이크로딩시간을 조절한다.
                         {
                             Debug.Log(loadingTime);    //총 걸린시간 체크
+                            isLoading = false;//로딩끝났다고 설정
                             op.allowSceneActivation = true; //해당 변수가 true면 progress 값이 0.9(90%)값이 넘어가는순간 다음씬을 로딩한다.
                             yield break; //제어권넘기기
                         }

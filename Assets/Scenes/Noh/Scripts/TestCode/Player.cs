@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class Player : MonoBehaviour
 {
-    KeyMouseInputSystem inputSystem;
+    InputKeyMouse inputSystem;
     [SerializeField]
     private float defaultSpeed = 1.0f;
 
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        inputSystem = new KeyMouseInputSystem();
+        inputSystem = new InputKeyMouse();
 
         
     }

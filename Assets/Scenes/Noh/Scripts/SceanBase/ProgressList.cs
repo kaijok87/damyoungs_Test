@@ -5,9 +5,10 @@ using UnityEngine;
 
 /// <summary>
 /// 옵션에서 프로그래스이미지 변경 기능 넣기위해 따로 제작  
+/// 씬이동시에도 유지되기때문에 여기서 처리한다.
 /// </summary>
-public class ProgressList : SingletonBase<ProgressList> 
-    /// 일단 만들자 
+public class ProgressList : Singleton<ProgressList> 
+
     
     /// 프로그래스바 변경시 이스크립트에 추가
 {
@@ -17,14 +18,14 @@ public class ProgressList : SingletonBase<ProgressList>
     [SerializeField]
     private GameObject originBar;
     /// <summary>
-    /// 트랜스폼 변경을위해 복사해둔 이미지파일
+    /// transform 변경을위해 복사해둔 이미지파일
     /// </summary>
     private GameObject progressBar;
 
     /// <summary>
     /// ProgressBar  
     /// </summary>
-    /// <param name="type"></param>
+    /// <param name="type">타입</param>
     /// <param name="transform"></param>
     /// <returns></returns>
     public GameObject GetProgress(EnumList.ProgressType type, Transform transform) {
@@ -33,7 +34,9 @@ public class ProgressList : SingletonBase<ProgressList>
             case EnumList.ProgressType.Bar:
                 if (progressBar == null) //최초에 값이 없으면 생성한다.
                 {
-                    progressBar = Instantiate(originBar, transform); //로딩창은 항상 초기화 되서 미리만들어두어야 매번안만든다. - 팩토리로 빼는작업 진행중
+                    //로딩창은 항상 초기화 되서 미리만들어두어야 매번안만든다. 
+                    //하나만만들어서 사용되기때문에 팩토리안만들고 해당클래스에서 처리                
+                    progressBar = Instantiate(originBar, transform); //새로운객체만들어서 필요할때 넘겨준다.
                 }
                 return progressBar;
             default:

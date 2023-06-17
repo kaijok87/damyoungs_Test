@@ -21,7 +21,7 @@ using UnityEngine.Rendering;
 /// try{}cahch(Exeption e){} 를 사용한이유는 게임저장은 게임상에서 단독으로 이루어지는 기능이고 
 /// 여기서 오류가난다고 게임이 멈추면 안되기때문에 에러발생하더라도 멈추지않고 플레이 되도록 추가하였다.
 /// </summary>
-public class SaveLoadManager : SingletonBase<SaveLoadManager> {
+public class SaveLoadManager : Singleton<SaveLoadManager> {
 
     /// <summary>
     /// 저장폴더 위치 
@@ -265,7 +265,7 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager> {
     protected override void Awake()
     {
         base.Awake();
-      //  TestcreateFiles(999);
+        TestcreateFiles(999);
 
 
 

@@ -9,7 +9,8 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using EnumList;
 
-public class TestIO : GameOptionsBase
+public class TestIO : MonoBehaviour
+
 {
 
 
@@ -20,7 +21,7 @@ public class TestIO : GameOptionsBase
 
     public int index = 0;
     const string soundPath = "/BGM/Piano Instrumental 1.wav";
-    protected override void OnLeftClick(InputAction.CallbackContext context)
+    protected  void OnLeftClick(InputAction.CallbackContext context)
     {
         if (context.performed) {
             //폴더 없으면 만들고 시작
@@ -66,21 +67,14 @@ public class TestIO : GameOptionsBase
         saveData = new BaseSaveData<string>();
         saveData.TestFunc();
         FileInfo[] fi = SaveLoadManager.Instance.GetSaveFileList();
-        
         for (int i = 0; i < minlength; i++)
         {
             GameObject go = MultipleObjectsFactory.Instance.GetObject(EnumList.MultipleFactoryObjectList.SaveDataPool);
             go.GetComponent<RectTransform>().localPosition = new Vector3(678, - (i * minY) - 85.0f, 0);
             //go.transform.localPosition.Set(go.transform.localPosition.x, go.transform.localPosition.y - (i * minY), go.transform.localPosition.z);
             SaveData sd = go.GetComponent<SaveData>();
-            if (fi == null) { 
-                sd.CreateTime = fi[i].LastWriteTime.ToString();
-                sd.name = fi[i].Name;
-            }
-            sd.CreateTime = "파일이없다요";
-            sd.name = "파일이없다네";
-            
             sd.FileIndex = i;
+            sd.CreateTime = fi[i].LastWriteTime.ToString();
             sd.Money = saveData.Money;
             sd.CharcterName = saveData.CharcterName;
             sd.SceanName = LoadingScean.SceanName;
@@ -96,7 +90,14 @@ public class TestIO : GameOptionsBase
         //}
         //string temp = SaveLoadManager.Instance.TestFileDataLoad(0);
     }
-        //화면만들고 파일 있는지 검색하는기능 
-        // 있는파일리스트를 화면에 보여주는 기능
-        //파일 삭제기능
+    //화면만들고 파일 있는지 검색하는기능 
+    // 있는파일리스트를 화면에 보여주는 기능
+    //파일 삭제기능
+
+
+    public void TitleLoad()
+    {
+        LoadingScean.SceanLoading(EnumList.SceanName.Title);
+        WindowList.Instance.OptionsWindow.SetActive(false);
+    }
 }
