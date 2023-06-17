@@ -1,0 +1,52 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+
+    /// <summary>
+    /// 기본적으로 복수로 생성되는 객체 정의
+    /// </summary>
+    public class MultipleObjectsFactory : SingletonBase<MultipleObjectsFactory>
+    {
+     
+        /// <summary>
+        /// 저장화면에 보여질 오브젝트풀
+        /// </summary>
+        SaveDataPool saveDataPool;
+
+        /// <summary>
+        /// 팩토리 생성시 초기화 함수
+        /// </summary>
+        /// <param name="scene">씬정보 딱히필요없음</param>
+        /// <param name="mode">모드정보 딱히필요없음</param>
+        protected override void Init(Scene scene, LoadSceneMode mode)
+        {
+            saveDataPool = GetComponentInChildren<SaveDataPool>();
+            base.Init(scene, mode);
+            saveDataPool.Initialize();
+        }
+
+        /// <summary>
+        /// 객체 생성하기
+        /// </summary>
+        /// <param name="type">객체종류</param>
+        /// <returns>생성된 객체</returns>
+        public GameObject GetObject(EnumList.MultipleFactoryObjectList type)
+        {
+            GameObject obj = null;
+            switch (type)
+            {
+                case EnumList.MultipleFactoryObjectList.SaveDataPool:
+                    obj = saveDataPool?.GetObject()?.gameObject;
+                    break;
+
+                default:
+
+                    break;
+            }
+            return obj;
+        }
+    }
+
+

@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - GameOptions
+  - WindowList
+  - TitleButton
+  - Window
+  - SaveList
   layers:
   - Default
   - TransparentFX
@@ -12,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - TitleMenu
   - 
   - 
   - 
@@ -41,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: TitleMenu
+    uniqueID: 3815101775
+    locked: 0
+  - name: WindowMenu
+    uniqueID: 2850022821
     locked: 0

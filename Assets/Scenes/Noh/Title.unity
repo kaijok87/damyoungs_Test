@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 574126721}
   m_Layer: 0
   m_Name: Exit
-  m_TagString: Button
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 590633737}
   m_Layer: 0
   m_Name: Continue
-  m_TagString: Button
+  m_TagString: TitleButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 691454008}
   m_Layer: 0
   m_Name: NewGame
-  m_TagString: Button
+  m_TagString: TitleButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -837,7 +837,7 @@ GameObject:
   - component: {fileID: 1052001603}
   - component: {fileID: 1052001602}
   - component: {fileID: 1052001601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +902,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -479865521
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1052001604
@@ -1018,7 +1018,7 @@ GameObject:
   - component: {fileID: 1324545784}
   m_Layer: 0
   m_Name: Options
-  m_TagString: Button
+  m_TagString: TitleButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1368,6 +1368,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4077213339097449774, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077213339097449774, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077213339869813528, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077213339945311604, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077213340105261214, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077213340454574974, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4077213340760085924, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1455,6 +1479,30 @@ PrefabInstance:
     - target: {fileID: 4077213340760085928, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
       propertyPath: m_Name
       value: WindowList
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077213340760085928, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077213340760085928, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077213340760085928, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_TagString
+      value: WindowList
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077213340760085931, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 597878335}
+    - target: {fileID: 4077213340760085931, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1444944475
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077213340878875657, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6080029d1f6ef614dbe9dc4f50168eff, type: 3}
