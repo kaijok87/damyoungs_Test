@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class CharcterBaseTest : MonoBehaviour
 {
-    protected KeyMouseInputSystem moveEvent;
+    InputKeyMouse moveEvent;
     [SerializeField]
     GameObject cameraObj;
     [SerializeField]
@@ -25,7 +25,7 @@ public class CharcterBaseTest : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Awake()
     {
-        moveEvent = new KeyMouseInputSystem();
+        moveEvent = new InputKeyMouse();
        
     }
 

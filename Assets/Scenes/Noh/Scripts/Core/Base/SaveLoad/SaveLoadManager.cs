@@ -259,17 +259,6 @@ public class SaveLoadManager : Singleton<SaveLoadManager> {
         }
         return null;
     }
-    /// <summary>
-    /// 테스트용
-    /// </summary>
-    protected override void Awake()
-    {
-        base.Awake();
-        TestcreateFiles(999);
-
-
-
-    }
-
+   
    
 }

@@ -170,27 +170,47 @@ public partial class @InputKeyMouse: IInputActionCollection2, IDisposable
         },
         {
             ""name"": ""Mouse"",
-            ""id"": ""c979b464-daf0-49e0-add5-8f4c5d29e868"",
+            ""id"": ""f1e4a85e-3bfc-4c6d-9743-b903aec62752"",
             ""actions"": [
                 {
-                    ""name"": ""VirtualMouse"",
-                    ""type"": ""Value"",
-                    ""id"": ""8cc10dcf-d163-4797-8793-ddbd8cddcbba"",
+                    ""name"": ""MouseClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""860a2f18-a6e5-4d25-be20-420123db91d7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestClick"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""adc083b8-1d53-4c42-8333-0f490a6b2964"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""b381c6f8-f0c6-44ec-aceb-1f1d249f4bee"",
-                    ""path"": ""<VirtualMouse>/leftButton"",
+                    ""id"": ""b4422859-ba09-41c2-87ed-f2055c1670ff"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""VirtualMouse"",
+                    ""action"": ""MouseClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fda9b359-ecf4-46a5-9055-007b9400a155"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TestClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -303,6 +323,188 @@ public partial class @InputKeyMouse: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Charcter"",
+            ""id"": ""08432d6d-899a-4541-85a4-2be2bdf79b7e"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveAndUpDown"",
+                    ""type"": ""Value"",
+                    ""id"": ""67b96c39-b1a8-4af0-9039-5db8ccc1839b"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MoveBooster"",
+                    ""type"": ""Value"",
+                    ""id"": ""7102c3f9-7f54-4de4-af9b-9fc94d975f5b"",
+                    ""expectedControlType"": ""Key"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""3D Vector"",
+                    ""id"": ""12dde97c-8e1e-45b9-84c9-ba1b613133ce"",
+                    ""path"": ""3DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveAndUpDown"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""053000bf-5a32-42e1-8d48-4da25c7e8054"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveAndUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""e802f7a8-7bae-4f59-bc7d-28325d8127f7"",
+                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveAndUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""8ae54434-7c33-4482-a8fb-5e2d4580153c"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveAndUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""7c10b84d-180d-4e4c-9a4c-5f6c5dfd02ec"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveAndUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""forward"",
+                    ""id"": ""22031b0a-2d9d-4c95-8622-950f1072196f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveAndUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""backward"",
+                    ""id"": ""42a79d8e-567c-433a-b44c-414a2dc5854c"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveAndUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6bfc6364-c2b8-42a3-8dd6-ea2569fea6e0"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveBooster"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""KeyBorad"",
+            ""id"": ""ff5bd8d5-e400-4eb2-b7d3-71fd160c2c2b"",
+            ""actions"": [
+                {
+                    ""name"": ""System"",
+                    ""type"": ""Button"",
+                    ""id"": ""ce85bb58-3191-4d62-a457-cd126dccebac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OptionKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""51f2f8a8-f04c-4371-acc1-d0bdcb6c9283"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InvenKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""a7db8ebc-c614-4ce4-8727-f069fa626f58"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""10c2f74a-7367-435e-b7a0-652e6d36cbc5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""System"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93a0022b-0bf3-4c42-b58a-06f605575090"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OptionKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f00f3477-90a9-49d9-8b08-4a0376eefec0"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InvenKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -331,7 +533,8 @@ public partial class @InputKeyMouse: IInputActionCollection2, IDisposable
         m_Player_WindowOpen = m_Player.FindAction("WindowOpen", throwIfNotFound: true);
         // Mouse
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
-        m_Mouse_VirtualMouse = m_Mouse.FindAction("VirtualMouse", throwIfNotFound: true);
+        m_Mouse_MouseClick = m_Mouse.FindAction("MouseClick", throwIfNotFound: true);
+        m_Mouse_TestClick = m_Mouse.FindAction("TestClick", throwIfNotFound: true);
         // Test
         m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
         m_Test_Test1 = m_Test.FindAction("Test1", throwIfNotFound: true);
@@ -339,6 +542,15 @@ public partial class @InputKeyMouse: IInputActionCollection2, IDisposable
         m_Test_Test3 = m_Test.FindAction("Test3", throwIfNotFound: true);
         m_Test_Test4 = m_Test.FindAction("Test4", throwIfNotFound: true);
         m_Test_Test5 = m_Test.FindAction("Test5", throwIfNotFound: true);
+        // Charcter
+        m_Charcter = asset.FindActionMap("Charcter", throwIfNotFound: true);
+        m_Charcter_MoveAndUpDown = m_Charcter.FindAction("MoveAndUpDown", throwIfNotFound: true);
+        m_Charcter_MoveBooster = m_Charcter.FindAction("MoveBooster", throwIfNotFound: true);
+        // KeyBorad
+        m_KeyBorad = asset.FindActionMap("KeyBorad", throwIfNotFound: true);
+        m_KeyBorad_System = m_KeyBorad.FindAction("System", throwIfNotFound: true);
+        m_KeyBorad_OptionKey = m_KeyBorad.FindAction("OptionKey", throwIfNotFound: true);
+        m_KeyBorad_InvenKey = m_KeyBorad.FindAction("InvenKey", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -462,12 +674,14 @@ public partial class @InputKeyMouse: IInputActionCollection2, IDisposable
     // Mouse
     private readonly InputActionMap m_Mouse;
     private List<IMouseActions> m_MouseActionsCallbackInterfaces = new List<IMouseActions>();
-    private readonly InputAction m_Mouse_VirtualMouse;
+    private readonly InputAction m_Mouse_MouseClick;
+    private readonly InputAction m_Mouse_TestClick;
     public struct MouseActions
     {
         private @InputKeyMouse m_Wrapper;
         public MouseActions(@InputKeyMouse wrapper) { m_Wrapper = wrapper; }
-        public InputAction @VirtualMouse => m_Wrapper.m_Mouse_VirtualMouse;
+        public InputAction @MouseClick => m_Wrapper.m_Mouse_MouseClick;
+        public InputAction @TestClick => m_Wrapper.m_Mouse_TestClick;
         public InputActionMap Get() { return m_Wrapper.m_Mouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -477,16 +691,22 @@ public partial class @InputKeyMouse: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MouseActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MouseActionsCallbackInterfaces.Add(instance);
-            @VirtualMouse.started += instance.OnVirtualMouse;
-            @VirtualMouse.performed += instance.OnVirtualMouse;
-            @VirtualMouse.canceled += instance.OnVirtualMouse;
+            @MouseClick.started += instance.OnMouseClick;
+            @MouseClick.performed += instance.OnMouseClick;
+            @MouseClick.canceled += instance.OnMouseClick;
+            @TestClick.started += instance.OnTestClick;
+            @TestClick.performed += instance.OnTestClick;
+            @TestClick.canceled += instance.OnTestClick;
         }
 
         private void UnregisterCallbacks(IMouseActions instance)
         {
-            @VirtualMouse.started -= instance.OnVirtualMouse;
-            @VirtualMouse.performed -= instance.OnVirtualMouse;
-            @VirtualMouse.canceled -= instance.OnVirtualMouse;
+            @MouseClick.started -= instance.OnMouseClick;
+            @MouseClick.performed -= instance.OnMouseClick;
+            @MouseClick.canceled -= instance.OnMouseClick;
+            @TestClick.started -= instance.OnTestClick;
+            @TestClick.performed -= instance.OnTestClick;
+            @TestClick.canceled -= instance.OnTestClick;
         }
 
         public void RemoveCallbacks(IMouseActions instance)
@@ -582,6 +802,122 @@ public partial class @InputKeyMouse: IInputActionCollection2, IDisposable
         }
     }
     public TestActions @Test => new TestActions(this);
+
+    // Charcter
+    private readonly InputActionMap m_Charcter;
+    private List<ICharcterActions> m_CharcterActionsCallbackInterfaces = new List<ICharcterActions>();
+    private readonly InputAction m_Charcter_MoveAndUpDown;
+    private readonly InputAction m_Charcter_MoveBooster;
+    public struct CharcterActions
+    {
+        private @InputKeyMouse m_Wrapper;
+        public CharcterActions(@InputKeyMouse wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveAndUpDown => m_Wrapper.m_Charcter_MoveAndUpDown;
+        public InputAction @MoveBooster => m_Wrapper.m_Charcter_MoveBooster;
+        public InputActionMap Get() { return m_Wrapper.m_Charcter; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CharcterActions set) { return set.Get(); }
+        public void AddCallbacks(ICharcterActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CharcterActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CharcterActionsCallbackInterfaces.Add(instance);
+            @MoveAndUpDown.started += instance.OnMoveAndUpDown;
+            @MoveAndUpDown.performed += instance.OnMoveAndUpDown;
+            @MoveAndUpDown.canceled += instance.OnMoveAndUpDown;
+            @MoveBooster.started += instance.OnMoveBooster;
+            @MoveBooster.performed += instance.OnMoveBooster;
+            @MoveBooster.canceled += instance.OnMoveBooster;
+        }
+
+        private void UnregisterCallbacks(ICharcterActions instance)
+        {
+            @MoveAndUpDown.started -= instance.OnMoveAndUpDown;
+            @MoveAndUpDown.performed -= instance.OnMoveAndUpDown;
+            @MoveAndUpDown.canceled -= instance.OnMoveAndUpDown;
+            @MoveBooster.started -= instance.OnMoveBooster;
+            @MoveBooster.performed -= instance.OnMoveBooster;
+            @MoveBooster.canceled -= instance.OnMoveBooster;
+        }
+
+        public void RemoveCallbacks(ICharcterActions instance)
+        {
+            if (m_Wrapper.m_CharcterActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICharcterActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CharcterActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CharcterActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CharcterActions @Charcter => new CharcterActions(this);
+
+    // KeyBorad
+    private readonly InputActionMap m_KeyBorad;
+    private List<IKeyBoradActions> m_KeyBoradActionsCallbackInterfaces = new List<IKeyBoradActions>();
+    private readonly InputAction m_KeyBorad_System;
+    private readonly InputAction m_KeyBorad_OptionKey;
+    private readonly InputAction m_KeyBorad_InvenKey;
+    public struct KeyBoradActions
+    {
+        private @InputKeyMouse m_Wrapper;
+        public KeyBoradActions(@InputKeyMouse wrapper) { m_Wrapper = wrapper; }
+        public InputAction @System => m_Wrapper.m_KeyBorad_System;
+        public InputAction @OptionKey => m_Wrapper.m_KeyBorad_OptionKey;
+        public InputAction @InvenKey => m_Wrapper.m_KeyBorad_InvenKey;
+        public InputActionMap Get() { return m_Wrapper.m_KeyBorad; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KeyBoradActions set) { return set.Get(); }
+        public void AddCallbacks(IKeyBoradActions instance)
+        {
+            if (instance == null || m_Wrapper.m_KeyBoradActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_KeyBoradActionsCallbackInterfaces.Add(instance);
+            @System.started += instance.OnSystem;
+            @System.performed += instance.OnSystem;
+            @System.canceled += instance.OnSystem;
+            @OptionKey.started += instance.OnOptionKey;
+            @OptionKey.performed += instance.OnOptionKey;
+            @OptionKey.canceled += instance.OnOptionKey;
+            @InvenKey.started += instance.OnInvenKey;
+            @InvenKey.performed += instance.OnInvenKey;
+            @InvenKey.canceled += instance.OnInvenKey;
+        }
+
+        private void UnregisterCallbacks(IKeyBoradActions instance)
+        {
+            @System.started -= instance.OnSystem;
+            @System.performed -= instance.OnSystem;
+            @System.canceled -= instance.OnSystem;
+            @OptionKey.started -= instance.OnOptionKey;
+            @OptionKey.performed -= instance.OnOptionKey;
+            @OptionKey.canceled -= instance.OnOptionKey;
+            @InvenKey.started -= instance.OnInvenKey;
+            @InvenKey.performed -= instance.OnInvenKey;
+            @InvenKey.canceled -= instance.OnInvenKey;
+        }
+
+        public void RemoveCallbacks(IKeyBoradActions instance)
+        {
+            if (m_Wrapper.m_KeyBoradActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IKeyBoradActions instance)
+        {
+            foreach (var item in m_Wrapper.m_KeyBoradActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_KeyBoradActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public KeyBoradActions @KeyBorad => new KeyBoradActions(this);
     private int m_KeyMouseSchemeIndex = -1;
     public InputControlScheme KeyMouseScheme
     {
@@ -599,7 +935,8 @@ public partial class @InputKeyMouse: IInputActionCollection2, IDisposable
     }
     public interface IMouseActions
     {
-        void OnVirtualMouse(InputAction.CallbackContext context);
+        void OnMouseClick(InputAction.CallbackContext context);
+        void OnTestClick(InputAction.CallbackContext context);
     }
     public interface ITestActions
     {
@@ -608,5 +945,16 @@ public partial class @InputKeyMouse: IInputActionCollection2, IDisposable
         void OnTest3(InputAction.CallbackContext context);
         void OnTest4(InputAction.CallbackContext context);
         void OnTest5(InputAction.CallbackContext context);
+    }
+    public interface ICharcterActions
+    {
+        void OnMoveAndUpDown(InputAction.CallbackContext context);
+        void OnMoveBooster(InputAction.CallbackContext context);
+    }
+    public interface IKeyBoradActions
+    {
+        void OnSystem(InputAction.CallbackContext context);
+        void OnOptionKey(InputAction.CallbackContext context);
+        void OnInvenKey(InputAction.CallbackContext context);
     }
 }
