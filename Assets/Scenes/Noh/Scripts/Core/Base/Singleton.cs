@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
         2-2 . 싱글톤클래스 호출시 확인
     3. 씬 변환 시 오브젝트가 초기화되니 초기화 안되게 DontDestroyOnLoad(instance.gameObject); 함수를 사용 
  
+    4. 상속받은 클래스가 제네릭이면 AddComponent에서 자료의 형태를 찾을수가없다.
     - 유니티에서의 싱글톤은 나중에 생성된것을 사용하는것이 낫다.?
     - 게으른 할당?
  */
@@ -17,6 +18,7 @@ using UnityEngine.SceneManagement;
 //where 는 조건 걸기위해 작성한다.
 public class Singleton<T> : MonoBehaviour where T : Component
 {
+    
     /// <summary>
     /// 이미 종료처리에 들어갔는지 확인하기 위한 변수
     /// </summary>

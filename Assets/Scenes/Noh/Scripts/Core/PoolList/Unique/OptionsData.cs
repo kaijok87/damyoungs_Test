@@ -15,6 +15,11 @@ public class OptionsData : Singleton<OptionsData>
         audioSetting = GetComponent<AudioSource>();
     }
 
+
+    protected void Start()
+    {
+        
+    }
     /// <summary>
     /// º¼·ýÁ¶Àý
     /// </summary>
@@ -48,6 +53,6 @@ public class OptionsData : Singleton<OptionsData>
             AudioSource adTest = new AudioSource();
             
 
-        Component comp;
+        //Component comp;
     }
 }

@@ -51,38 +51,56 @@ public struct dumyData
     }
 
 }
-[Serializable]
+[Serializable] //필수로 해야 직렬화작업을거쳐서 json파싱이된다. 클래스나 구조체의 선언부 위에속성을 붙혀주면된다.
 public struct stringArray
 {
-    public string[] values;
-    public stringArray(string[] values) { 
+    [SerializeField] //private 선언시 이속성이있으면 json 파싱이된다
+    string[] values ;
+    public string[] Values { 
+        get => values ;
+        set => values = value;
+    }
+    public int[] tempInt; // 속성추가안할시 public 으로해도된다
+    public stringArray(string[] values, int[] tempInt) { 
         this.values = values;
+        this.tempInt = tempInt;
     }
 }
 [Serializable]
 public struct stringDoubleArray {
-    public stringArray[] values;
+    [SerializeField]
+    stringArray[] values;
     public stringArray[] Values { 
         get => values;
-        set => values = value;
+        set => values = value;  
     }
-    public stringDoubleArray(stringArray[] values) {
+    public float[] yami;
+    public stringDoubleArray(stringArray[] values, float[] yami) {
         this.values = values;
+        this.yami = yami;
     }
 }
 [Serializable]
 public struct stringTripleArray
 {
-    public stringDoubleArray[] values;
+    [SerializeField]
+    stringDoubleArray[] values;
+    
     public stringTripleArray(stringDoubleArray[] values) {
         this.values = values;
     }
 }
 
 [Serializable]
-public class BaseSaveData<T> : JsonGameData 
+public class TestSaveData<T> : JsonGameData  // 상속받은 것도 같이 json으로 파싱이된다. 제네릭 도 같이 파싱이 된다.
 {
-    public BaseSaveData() { }   
+    public TestSaveData() {
+        charcterInfo.Level = 98;
+        charcterInfo.CharcterName = "아주그냥끝장을보는놈";
+        charcterInfo.CharcterPosition = new Vector3(0,0,9999.0f);
+        charcterInfo.EXP = 990930930;
+        charcterInfo.Money = 19191919191919191;
+    }   
     [SerializeField]stringTripleArray stringTripleArray = new stringTripleArray();
     [SerializeField]dumyData dumyData = new dumyData();
     [SerializeField]dumyData dumyEmpty;
@@ -99,19 +117,30 @@ public class BaseSaveData<T> : JsonGameData
     [SerializeField]string[] tempString = {"이","게","저","장","되","네" };
     [SerializeField]stringArray[] tempArray = new stringArray[3];
     [SerializeField]stringDoubleArray[] tempDoubleArray = new stringDoubleArray[3];
+    [SerializeField]float[] yamiTest = { 10.5f, 20.6f, 33.41f,555.3f};
     public void TestFunc() {
 
-        //다중배열 처리 방식 
-        for (int i=0; i< tempArray.Length; i++) {
-            tempArray[i].values = tempString;
+        //다중배열 처리 방식 데이터입력 확인  json파싱도 확인완료  정상적으로 저장되고 불러옴 
+        for (int i = 0; i < tempArray.Length; i++)
+        {
+            tempArray[i].Values = new string[3]; //새로만들어서 
+            tempArray[i].tempInt = new int[3];
+            for (int j = 0; j < tempArray[i].Values.Length; j++)
+            {
+                tempArray[i].Values[j] = tempString[j]; //하나씩 넣어도되고 
+            }
+            for (int j = 0; j < tempArray[i].tempInt.Length; j++) {
+                tempArray[i].tempInt[j] = invenIndex[j];
+            }
         }
         for (int i = 0; i < tempDoubleArray.Length; i++)
         {
-            tempDoubleArray[i].Values = tempArray;
+            tempDoubleArray[i].Values = tempArray;// 밖에서 만들어진것을 집어넣어도된다.
+            tempDoubleArray[i].yami = yamiTest;
         }
-        stringTripleArray.values = tempDoubleArray;
+        stringTripleArray  = new stringTripleArray(tempDoubleArray);
 
-        Money = 99955555999;
+
         //foreach는 읽기 전용으로 만들어져있어서 value 변수는 기본적으로 readonly 값을 가진다.
         //foreach (stringArray value in tempArray) { 
         //    value.values = tempString;

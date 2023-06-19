@@ -20,12 +20,10 @@ public class TestCode : MonoBehaviour
         inputActions.Test.Test3.performed += Test3;
         inputActions.Test.Test4.performed += Test4;
         inputActions.Test.Test5.performed += Test5;
-        inputActions.Test.TestClick.performed += TestClick;
     }
 
     private void OnDisable()
     {
-        inputActions.Test.TestClick.performed -= TestClick;
         inputActions.Test.Test5.performed -= Test5;
         inputActions.Test.Test4.performed -= Test4;
         inputActions.Test.Test3.performed -= Test3;

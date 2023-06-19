@@ -26,6 +26,9 @@ public class ObjectIsPool : MonoBehaviour
             transform.localRotation = Quaternion.identity;
         }
     }
+    /// <summary>
+    /// 비활성화된 부모에 들어간경우 동작을안하여 큐를 초기화할수없다.
+    /// </summary>
     protected virtual void OnDisable() 
     {
         onDisable?.Invoke(); //Queue 초기화한다.
@@ -36,7 +39,7 @@ public class ObjectIsPool : MonoBehaviour
     /// </summary>
     /// <param name="delay">비활성화가 될때까지 걸리는 시간(기본 = 0.0f)</param>
     /// <returns></returns>
-    protected IEnumerator LifeOver(float delay = 0.0f)
+    protected virtual IEnumerator LifeOver(float delay = 0.0f)
     {
         yield return new WaitForSeconds(delay); // delay만큼 대기하고
         gameObject.SetActive(false);            // 게임 오브젝트 비활성화
