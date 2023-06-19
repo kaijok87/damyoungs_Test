@@ -15,6 +15,11 @@ public class OptionsData : Singleton<OptionsData>
         audioSetting = GetComponent<AudioSource>();
     }
 
+
+    protected void Start()
+    {
+        
+    }
     /// <summary>
     /// º¼·ýÁ¶Àý
     /// </summary>

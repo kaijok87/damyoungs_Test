@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MultipleObjectsFactory : Singleton<MultipleObjectsFactory>
     {
-     
         /// <summary>
         /// 저장화면에 보여질 오브젝트풀
         /// </summary>

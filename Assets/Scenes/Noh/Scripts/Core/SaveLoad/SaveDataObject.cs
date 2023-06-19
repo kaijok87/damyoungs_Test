@@ -1,27 +1,27 @@
-using EnumList;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /// <summary>
 /// 저장화면에 보이는 파일 정보 
-/// 다듬는 중
+/// 
 /// </summary>
-public class SaveData : ObjectIsPool
+public class SaveDataObject : SaveDataIsPool
 {
-    ///// <summary>
-    ///// 파일명  
-    ///// </summary>
-    //private string fileName;
-    //public string FileName { 
-    //    get => fileName; 
-    //    set => fileName = value;
-    //}
+    /// <summary>
+    /// 클릭했을때 오브젝트 인덱스
+    /// </summary>
+    private int objectIndex = -1;
+    public int ObjectIndex { 
+        get => objectIndex; 
+        set => objectIndex = value; 
+    }
     /// <summary>
     /// 내부적인 인덱스값
+    /// -1값이면 초기상태
     /// </summary>
-    private int fileIndex = 0;
+    private int fileIndex = -1;
     public int FileIndex { 
         get => fileIndex;
         set {
@@ -37,7 +37,7 @@ public class SaveData : ObjectIsPool
         get => createTime;
         set { 
             createTime = value;
-            createTimeObj.text = createTime.ToString();
+            createTimeObj.text = createTime;
         } 
     }
     /// <summary>
@@ -78,18 +78,40 @@ public class SaveData : ObjectIsPool
     /// 오브젝트밑에 텍스트 오브젝트들 
     /// </summary>
     [SerializeField]
-    TextMeshProUGUI saveFileNameObj;
+    TextMeshProUGUI saveFileNameObj; // 파일이름? 
     [SerializeField]
-    TextMeshProUGUI charcterInfoObj;
+    TextMeshProUGUI charcterInfoObj; // 캐릭터이름 , 저장위치 , 돈 , 레벨 정도?
     [SerializeField]
-    TextMeshProUGUI createTimeObj;
+    TextMeshProUGUI createTimeObj;   // 저장시간 보여주기
 
     /// <summary>
     /// 생성시 포지션리셋 여부 셋팅
     /// </summary>
     private void Awake()
     {
-        //로컬포지션 리셋하지않게 변수셋팅
+        //풀에서 처리시 로컬포지션 리셋하지않게 변수셋팅
         isPositionReset = false;
+        Button bt = gameObject.AddComponent<Button>();
+        bt.onClick.AddListener( () => TestClick());
+    }
+
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+    }
+    
+    
+    private void TestClick()
+    {
+        if (FileIndex > 0) {
+            Debug.Log($"{fileIndex} 번째 클릭");
+            Debug.Log($"{objectIndex} 이게오브젝트순서");
+        }
+        else{
+            Debug.Log($"{objectIndex} 이게오브젝트순서");
+        }
+
     }
 }

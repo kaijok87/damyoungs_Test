@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -22,29 +23,50 @@ public class MultipleObjectPool<T> : MonoBehaviour where T : ObjectIsPool
     /// <summary>
     /// 풀이 생성한 모든 오브젝트가 들어있는 배열
     /// </summary>
-    T[] pool;
+    protected T[] pool;
 
     /// <summary>
     /// 사용가능한(비활성화되어있는) 오브젝트들이 들어있는 큐
     /// </summary>
-    Queue<T> readyQueue;
-
+    protected Queue<T> readyQueue;
 
     /// <summary>
     /// 오브젝트 생성위치 변경할 변수 추가 
+    /// 이변수가 비활성화되있으면 GenerateObjects 함수의 마지막 비활성화 시켜도 OnDisable함수가 호출이안된다.
     /// </summary>
-   protected Transform setPosition;
+    protected Transform setPosition;
    
     
+
     /// <summary>
-    /// 객체 생성 전에 처리해야할 내용 추가하기위해 함수하나 추가로작성하였다.
+    /// 풀에서 객체 생성 전에 처리해야할 내용 
     /// </summary>
-    protected virtual void SettingFuntion() { 
-        
+    protected virtual void StartInitialize() {}
+
+    /// <summary>
+    /// 풀에서 객체 생성 후에 처리해야 할 내용 상속받아서 각자사용
+    /// </summary>
+    protected virtual void EndInitialize() {
+        if (readyQueue.Count == 0)
+        { //비활성화 된 부모에 들어간경우 카운트가 0이다 무한 생성을막기위해 큐를 초기화
+            for (int i = 0; i < poolSize; i++)
+            {
+                readyQueue.Enqueue(pool[i]);
+            }
+            //오브젝트풀의 치명적인 버그는 
+            //비활성화된 부모에 오브젝트들을 생성했을때 생긴다.
+            //비활성화된 부모에 집어넣을경우 기본적으로 SetEnable(false)를 실행시켜도 작동을안한다. 
+            //비활성화되면 큐에 데이터가 쌓이지않고 
+            //GetObject 를진행시 큐에내용가지고 확장함으로 무한 확장을 시작할것이다.
+        }
     }
+    /// <summary>
+    /// 화면전환시 계속 발생하여 버그가생긴다,.
+    /// </summary>
     public void Initialize()
     {
-        SettingFuntion();  //객체 생성되기전에 처리할 내용이 있는경우를 위해 추가
+        StartInitialize();  //객체 생성되기전에 처리할 내용이 있는경우를 위해 추가
+
         if (setPosition == null) {//오브젝트 생성위치 변경하는 로직을위해 조건문추가
             setPosition = transform;
         }
@@ -68,7 +90,7 @@ public class MultipleObjectPool<T> : MonoBehaviour where T : ObjectIsPool
                 obj.gameObject.SetActive(false);    // 전부 비활성화
             }
         }
-
+        EndInitialize();//초기화 끝날때  처리 할내용 
     }
 
     /// <summary>
@@ -95,7 +117,7 @@ public class MultipleObjectPool<T> : MonoBehaviour where T : ObjectIsPool
     /// <summary>
     /// 풀을 두배로 확장시키는 함수
     /// </summary>
-    private void ExpandPool()
+    void ExpandPool()
     {
         Debug.LogWarning($"{gameObject.name} 풀 사이즈 증가. {poolSize} -> {poolSize * 2}");
 
@@ -117,7 +139,7 @@ public class MultipleObjectPool<T> : MonoBehaviour where T : ObjectIsPool
     /// <param name="start">배열의 시작 인덱스</param>
     /// <param name="end">배열의 마지막 인덱스-1</param>
     /// <param name="newArray">생성된 오브젝트가 들어갈 배열</param>
-    private void GenerateObjects(int start, int end, T[] newArray)
+    void GenerateObjects(int start, int end, T[] newArray)
     {
         for (int i = start; i < end; i++)    // 새로 만들어진 크기만큼 반복
         {

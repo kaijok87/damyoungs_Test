@@ -80,8 +80,6 @@ public class LoadingScean : MonoBehaviour
     /// <returns></returns>
     IEnumerator LoadSceanProcess()
     {
-
-
         //비동기 씬로딩정보를 받기위해 가져오는 변수
         AsyncOperation op = SceneManager.LoadSceneAsync(nextSceanName);
 
@@ -103,8 +101,6 @@ public class LoadingScean : MonoBehaviour
                 {
                     yield return null; //진행바가 바뀔수있게 제어권을 넘긴다.
                     loadingTime += Time.unscaledDeltaTime; //로딩시간 체크
-
-
 
                     // 진행도 표시를 바꾸려면 밑에 로직을 추가
                     if (op.progress < 0.9f)

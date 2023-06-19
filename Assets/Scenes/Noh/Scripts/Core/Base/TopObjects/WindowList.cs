@@ -11,6 +11,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class WindowList : Singleton<WindowList> {
 
+ 
     /// <summary>
     /// 키입력 이벤트
     /// </summary>
@@ -51,15 +52,14 @@ public class WindowList : Singleton<WindowList> {
     //protected override void OnDisable()
     //{
     //    base.OnDisable();
-        
-        //inputKeyEvent.Mouse.MouseClick.performed -= OnLeftClick;
-        //inputKeyEvent.KeyBorad.OptionKey.performed -= OnOffWindowOption;
-        //inputKeyEvent.KeyBorad.InvenKey.performed -= OnOffInventory;
-        //inputKeyEvent.KeyBorad.System.performed -= OnOffWindowOption;
-        //inputKeyEvent.Disable();
+    //    inputKeyEvent.Mouse.MouseClick.performed -= OnLeftClick;
+    //    inputKeyEvent.KeyBorad.OptionKey.performed -= OnOffWindowOption;
+    //    inputKeyEvent.KeyBorad.InvenKey.performed -= OnOffInventory;
+    //    inputKeyEvent.KeyBorad.System.performed -= OnOffWindowOption;
+    //    inputKeyEvent.Disable();
     //}
 
-   
+
 
 
 
