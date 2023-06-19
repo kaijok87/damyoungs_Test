@@ -31,7 +31,7 @@ public class SaveDataPool : MultipleObjectPool<SaveDataIsPool>
         {
             obj.gameObject.SetActive(false);    // 전부 비활성화
         }
-        int forCount = readyQueue.count; // 레디큐 변동이 있는경우를 위해 포문 갯수 조절
+        int forCount = readyQueue.Count; // 레디큐 변동이 있는경우를 위해 포문 갯수 조절
         for (int i = 0; i < forCount; i++) // 포문돌면서 큐를 초기화
         {
             SaveDataIsPool comp = readyQueue.Dequeue();      // 하나 꺼내고
