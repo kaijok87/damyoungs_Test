@@ -11,6 +11,9 @@ public class MapTest : TestBase
     public GameObject sideTile;             // 외곽에 배치될 타일
     public GameObject vertexTile;           // 꼭지점 타일
 
+    public GameObject wall;                 // 벽
+
+
     int sizeX = 0;                          // 타일 가로 갯수
     int sizeY = 0;                          // 타일 세로 갯수
 
@@ -21,6 +24,7 @@ public class MapTest : TestBase
     Vector3 mainTileSize = Vector3.zero;    // 중앙 타일 사이즈
     Vector3 sideTileSize = Vector3.zero;    // 외곽 타일 사이즈
     Vector3 vertexTileSize = Vector3.zero;  // 꼭지점 타일 사이즈
+    Vector3 wallSize = Vector3.zero;        // 벽 사이즈
     Vector3 startPos = new Vector3();       // 추후에 캐릭터 놓을 위치. 지금은 임시적으로 (0, 0, 0) 으로 설정
 
     GameObject[] mapTiles;                // 타일 오브젝트 객체를 담을 배열(혹시나 싶어 이중배열 외에 하나로 하는 배열을 남겨둠)
@@ -57,22 +61,22 @@ public class MapTest : TestBase
                 // 사이드 타일 생성
                 if ((width == 0 && length == 0) || (width == 0 && length == sizeY - 1) || (width == sizeX - 1 && length == 0) || (width == sizeX - 1 && length == sizeY - 1))
                 {
-                    mapTiles[i, j] = Instantiate(vertexTile);
+                    mapTiles[i] = Instantiate(vertexTile, gameObject.transform);
                 }
-                else if (i == 0 || i == sizeX - 1 || j == 0 || j == sizeY - 1)              // 사이드 타일 회전
+                else if (width == 0 || width == sizeX - 1 || length == 0 || length == sizeY - 1)              // 사이드 타일 회전
                 {
-                    mapTiles[i, j] = Instantiate(sideTile);
-                    if (i == 0)                                                             // 왼쪽 세로줄
+                    mapTiles[i] = Instantiate(sideTile, gameObject.transform);
+                    if (width == 0)                                                             // 왼쪽 세로줄
                     {
-                        mapTiles[i, j].transform.Rotate(new Vector3(0, 90.0f, 0));
+                        mapTiles[i].transform.Rotate(new Vector3(0, 90.0f, 0));
                     }
-                    else if (i == sizeX - 1)                                                // 오른쪽 세로줄
+                    else if (width == sizeX - 1)                                                // 오른쪽 세로줄
                     {
-                        mapTiles[i, j].transform.Rotate(new Vector3(0, 270.0f, 0));
+                        mapTiles[i].transform.Rotate(new Vector3(0, 270.0f, 0));
                     }
-                    else if (j == 0)                                                        // 맨 윗줄
+                    else if (length == 0)                                                        // 맨 윗줄
                     {
-                        mapTiles[i, j].transform.Rotate(new Vector3(0, 180.0f, 0));
+                        mapTiles[i].transform.Rotate(new Vector3(0, 180.0f, 0));
                     }
                     //else if (j == sizeY - 1)                                              // 맨 아랫줄
                     //{
@@ -81,12 +85,9 @@ public class MapTest : TestBase
                 }
                 else
                 {
-                    mapTiles[i, j] = Instantiate(centerTile);                                               // 중앙 타일 생성
-                    mapTiles[i, j].transform.Rotate(new Vector3(0, 90.0f * Random.Range(0, 4), 0));         // 중앙 타일 랜덤 회전(그냥 미관상)
+                    mapTiles[i] = Instantiate(centerTile, gameObject.transform);                         // 중앙 타일 생성
+                    mapTiles[i].transform.Rotate(new Vector3(0, 90.0f * Random.Range(0, 4), 0));         // 중앙 타일 랜덤 회전(그냥 미관상)
                 }
-                mapTiles[i] = Instantiate(centerTile);
-        
-
 
                 // 타일 위치 이동. startPos는 임시로 넣어놓은 값(0, 0, 0)
                 mapTiles[i].transform.position = new Vector3(startPos.x - mainTileSize.x * sizeX / 2 + mainTileSize.x * width,
