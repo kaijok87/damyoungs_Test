@@ -36,12 +36,7 @@ public class OptionsData : Singleton<OptionsData>
     {
         switch (soundType)
         {
-            case EnumList.EffectSound.Explosion1:
-                break;
-            case EnumList.EffectSound.Explosion2:
-                break;
-            case EnumList.EffectSound.Explosion3:
-                break;
+       
             default:
                 break;
         }

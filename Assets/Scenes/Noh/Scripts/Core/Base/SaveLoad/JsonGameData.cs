@@ -63,8 +63,8 @@ public class JsonGameData
     /// 불러오기시 사용될 씬정보 
     /// </summary>
     [SerializeField]
-    string sceanName;
-    public string SceanName
+    EnumList.SceanName sceanName;
+    public EnumList.SceanName SceanName
     {
         get => sceanName;
         set
@@ -77,8 +77,8 @@ public class JsonGameData
     /// 캐릭터 에대한 정보
     /// </summary>
     [SerializeField]
-    protected StructList.CharcterInfo charcterInfo;
-    public StructList.CharcterInfo CharcterInfo
+    StructList.CharcterInfo[] charcterInfo;
+    public StructList.CharcterInfo[] CharcterInfo
     {
         get => charcterInfo;
         protected set
@@ -91,8 +91,8 @@ public class JsonGameData
     /// 캐릭터 소지아이템 리스트
     /// </summary>
     [SerializeField]
-    protected StructList.CharcterItems itemList;
-    public StructList.CharcterItems ItemList { 
+    StructList.CharcterItems[] itemList;
+    public StructList.CharcterItems[] ItemList { 
         get => itemList;
         protected set
         {
@@ -104,7 +104,7 @@ public class JsonGameData
     /// 캐릭터습득 기술 정보리스트
     /// </summary>
     [SerializeField]
-    protected StructList.CharcterSkills[] skillList;
+    StructList.CharcterSkills[] skillList;
     public StructList.CharcterSkills[] SkillList
     {
         get => skillList;
@@ -118,7 +118,7 @@ public class JsonGameData
     /// 캐릭터 퀘스트정보 리스트
     /// </summary>
     [SerializeField]
-    protected StructList.CharcterQuest[] questList;
+    StructList.CharcterQuest[] questList;
     public StructList.CharcterQuest[] QuestList
     {
         get => questList;

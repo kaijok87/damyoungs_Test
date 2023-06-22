@@ -11,12 +11,35 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class WindowList : Singleton<WindowList> {
 
- 
+    /// <summary>
+    /// 활성화 된 팝업이있는경우 defencePanel 셋팅
+    /// </summary>
+    EnumList.PopupList activePopup;
+    public EnumList.PopupList ActivePopup{
+        get =>activePopup;
+        set 
+        {
+            switch (value) {
+                case EnumList.PopupList.SAVELOADPOPUP:
+                    defencePanel.SetActive(true);
+                    break;
+                case EnumList.PopupList.NONE:
+                    defencePanel.SetActive(false);
+                    break;
+            }
+            activePopup = value;
+        } 
+    }
+    /// <summary>
+    /// 팝업창이뜨면 디펜스 패널을 띄워 인풋이벤트를 막는다.
+    /// </summary>
+    GameObject defencePanel;
+
     /// <summary>
     /// 키입력 이벤트
     /// </summary>
     InputKeyMouse inputKeyEvent;
-
+    public InputKeyMouse InputKeyEvent => inputKeyEvent;
     /// <summary>
     /// 관리할 윈도우 중 옵션관련 윈도우
     /// </summary>
@@ -30,7 +53,8 @@ public class WindowList : Singleton<WindowList> {
     {
         base.Awake();
         inputKeyEvent = new InputKeyMouse();
-        optionsWindow = transform.GetChild(0).gameObject; //첫번째로 지정해둬서 0번
+        defencePanel = transform.GetComponentInChildren<DefenceEvent>(true).gameObject; //이건순서가 제일 마지막이래야되서 계속바뀐다.
+        optionsWindow = transform.GetChild(0).gameObject; //옵션윈도우는 0번째다
     }
     /// <summary>
     /// 키입력및 마우스 입력처리도 추가하자
@@ -47,6 +71,7 @@ public class WindowList : Singleton<WindowList> {
     }
     /// <summary>
     /// 비활성화 될일이 게임종료될때만되기때문에 이벤트 삭제함수 처리안해도된다.
+    /// 다만 싱글톤 생성시 기존생성된것이 Destroy될때 비활성화를 실행하기때문에 오류가날수있다. - 확인완료
     /// 씬이동시 OnEnable함수가 재호출되진않는다 (확인완료)
     /// </summary>
     //protected override void OnDisable()
@@ -74,6 +99,7 @@ public class WindowList : Singleton<WindowList> {
             if (context.performed)
             {
                 optionsWindow.SetActive(!optionsWindow.activeSelf);//옵션윈도우 열고 닫고 
+                
             }
         }
     }

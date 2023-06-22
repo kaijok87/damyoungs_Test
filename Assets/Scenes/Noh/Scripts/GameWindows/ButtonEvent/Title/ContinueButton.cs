@@ -13,7 +13,7 @@ public class ContinueButton : MonoBehaviour
     EnumList.SceanName sceanName;
     private void Awake()
     {
-        sceanName = EnumList.SceanName.Title;
+        sceanName = EnumList.SceanName.SAVELOADTEST;
     }
     public void OnClickContinue()
     {

@@ -95,11 +95,12 @@ public struct stringTripleArray
 public class TestSaveData<T> : JsonGameData  // 상속받은 것도 같이 json으로 파싱이된다. 제네릭 도 같이 파싱이 된다.
 {
     public TestSaveData() {
-        charcterInfo.Level = 98;
-        charcterInfo.CharcterName = "아주그냥끝장을보는놈";
-        charcterInfo.CharcterPosition = new Vector3(0,0,9999.0f);
-        charcterInfo.EXP = 990930930;
-        charcterInfo.Money = 19191919191919191;
+        CharcterInfo = new StructList.CharcterInfo[1];
+        CharcterInfo[0].Level = 98;
+        CharcterInfo[0].CharcterName = "아주그냥끝장을보는놈";
+        CharcterInfo[0].CharcterPosition = new Vector3(0,0,9999.0f);
+        CharcterInfo[0].EXP = 990930930;
+        CharcterInfo[0].Money = 19191919191919191;
     }   
     [SerializeField]stringTripleArray stringTripleArray = new stringTripleArray();
     [SerializeField]dumyData dumyData = new dumyData();
@@ -145,6 +146,42 @@ public class TestSaveData<T> : JsonGameData  // 상속받은 것도 같이 json으로 파싱
         //foreach (stringArray value in tempArray) { 
         //    value.values = tempString;
         //}
+
+    }
+    public JsonGameData SetSaveData() {
+        TestSaveData<T> sd = new();
+        sd.TestFunc();
+        sd.SkillList = new StructList.CharcterSkills[2];
+        sd.SkillList[0].SkillIndex = 0;
+        sd.SkillList[1].SkillIndex = 1;
+        sd.SkillList[0].Values = 94;
+        sd.SkillList[1].Values = 922;
+        sd.ItemList = new StructList.CharcterItems[2];
+        sd.ItemList[0].ItemIndex = 923;
+        sd.ItemList[1].ItemIndex = 9;
+        sd.ItemList[0].Values = 212;
+        sd.ItemList[1].Values = 22;
+        sd.CharcterInfo = new StructList.CharcterInfo[1];
+        sd.CharcterInfo[0].EXP = 59458.2332f;
+        sd.CharcterInfo[0].CharcterName = "장발산";
+        sd.CharcterInfo[0].CharcterPosition = Vector3.zero;
+        sd.CharcterInfo[0].Level = 57;
+        sd.QuestList = new StructList.CharcterQuest[98];
+        for (int i= 0; i< sd.QuestList.Length; i++) {
+            sd.QuestList[i].QuestIndex = i;
+            sd.QuestList[i].QuestIProgress = i * i;
+        }
+        return sd;
+    }
+
+    public void SaveDataParsing(JsonGameData OriginData) {
+        int a =  OriginData.DataIndex;
+        EnumList.SceanName o = OriginData.SceanName;
+        string time = OriginData.SaveTime;
+        StructList.CharcterSkills[] b = OriginData.SkillList;
+        StructList.CharcterInfo[] c = OriginData.CharcterInfo;
+        StructList.CharcterItems[] d = OriginData.ItemList;
+        StructList.CharcterQuest[] f = OriginData.QuestList;
 
     }
 }

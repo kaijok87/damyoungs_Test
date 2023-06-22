@@ -6,6 +6,8 @@ using UnityEngine;
 /// 작성방법 
 /// 1. 변수는 기본적으로 private 로 선언후 프로퍼티를 생성한다. [필수적으로 캡슐화]
 /// 2. private 로 선언후 변수명에 속성을 [SerializeField] 로 설정한다  - 유니티 기본 JsonUtility 에서 데이터 입출력시 접근하기위해 사용  
+///  2-1. 유니티에서는 public 선언된 변수를 기본적으로 직렬화 작업을한다고한다 그러므로 private 로 [SerializeField] 로 선언한거랑 작업량은 같다.
+///         - https://docs.unity3d.com/ScriptReference/SerializeField.html 참조
 /// 3. 다중배열(2차원배열이상)은 1차원배열에 구조체를 넣고 구조체안에 다시 1차원배열로 구조를 짜는식으로 구조체를 이용하여 다중배열형식으로 만들고 변수로 넣는다. 테스트코드는 
 /// ex) struct A{B[] b; int i;}; struct B{C[] c; int a;};  struct C{int a;};  
 /// A a ; 
@@ -129,8 +131,8 @@ namespace StructList {
         /// 캐릭터의 경험치
         /// </summary>
         [SerializeField]
-        int exp;
-        public int EXP
+        float exp;
+        public float EXP
         {
             get => exp;
             set
@@ -188,6 +190,19 @@ namespace StructList {
             set
             {
                 questIndex = value;
+            }
+        }
+        /// <summary>
+        /// 이벤트 진행도
+        /// </summary>
+        [SerializeField]
+        int questIProgress;
+        public int QuestIProgress
+        {
+            get => questIProgress;
+            set
+            {
+                questIProgress = value;
             }
         }
     }

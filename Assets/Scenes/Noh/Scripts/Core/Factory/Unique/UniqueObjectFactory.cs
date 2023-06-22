@@ -60,15 +60,15 @@ public class UniqueObjectFactory : Singleton<UniqueObjectFactory>
     public GameObject GetObject(EnumList.UniqueFactoryObjectList type) {
 
         switch (type) {
-            case EnumList.UniqueFactoryObjectList.OptionWindow:
+            case EnumList.UniqueFactoryObjectList.OPTIONWINDOW:
                 return optionWindow;
-            case EnumList.UniqueFactoryObjectList.PlayerWindow:
+            case EnumList.UniqueFactoryObjectList.PLAYERWINDOW:
                 return playerWindow;
-            case EnumList.UniqueFactoryObjectList.NonPlayerWindow:
+            case EnumList.UniqueFactoryObjectList.NONPLAYERWINDOW:
                 return nonPlayerWindow;
-            case EnumList.UniqueFactoryObjectList.ProgressList:
+            case EnumList.UniqueFactoryObjectList.PROGRESSLIST:
                 return progressList;
-            case EnumList .UniqueFactoryObjectList.DefaultBGM:
+            case EnumList.UniqueFactoryObjectList.DEFAULTBGM:
                 return defaultBGM;
             default:
                 return null;
