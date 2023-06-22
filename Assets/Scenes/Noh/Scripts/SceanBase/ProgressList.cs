@@ -31,7 +31,7 @@ public class ProgressList : Singleton<ProgressList>
     public GameObject GetProgress(EnumList.ProgressType type, Transform transform) {
     
         switch (type) {
-            case EnumList.ProgressType.Bar:
+            case EnumList.ProgressType.BAR:
                 if (progressBar == null) //최초에 값이 없으면 생성한다.
                 {
                     //로딩창은 항상 초기화 되서 미리만들어두어야 매번안만든다. 

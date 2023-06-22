@@ -21,8 +21,11 @@ public class MultipleObjectsFactory : Singleton<MultipleObjectsFactory>
         /// <param name="scene">씬정보 딱히필요없음</param>
         /// <param name="mode">모드정보 딱히필요없음</param>
         protected override void Init(Scene scene, LoadSceneMode mode)
-        {
-            saveDataPool = GetComponentInChildren<SaveDataPool>();
+    {
+#if UNITY_EDITOR
+        Debug.LogWarning("가끔씩 순번꼬일때가있어서 체크 2번");
+#endif
+        saveDataPool = GetComponentInChildren<SaveDataPool>();
             base.Init(scene, mode);
             saveDataPool.Initialize();
         }
@@ -37,7 +40,7 @@ public class MultipleObjectsFactory : Singleton<MultipleObjectsFactory>
             GameObject obj = null;
             switch (type)
             {
-                case EnumList.MultipleFactoryObjectList.SaveDataPool:
+                case EnumList.MultipleFactoryObjectList.SAVEDATAPOOL:
                     obj = saveDataPool?.GetObject()?.gameObject;
                     break;
 

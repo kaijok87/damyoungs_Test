@@ -1,14 +1,18 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 /// <summary>
 /// 저장화면에 보이는 파일 정보 
-/// 
+/// 이오브젝트 클릭시 파일인덱스를 넘겨야한다.
 /// </summary>
 public class SaveDataObject : SaveDataIsPool
 {
+    //클릭됬을때 나 선택됬을때 체크할변수
+    bool isFocusing = false;
     /// <summary>
     /// 클릭했을때 오브젝트 인덱스
     /// </summary>
@@ -26,29 +30,36 @@ public class SaveDataObject : SaveDataIsPool
         get => fileIndex;
         set {
             fileIndex = value;
-            saveFileNameObj.text += fileIndex.ToString("D3");
+            if (fileIndex > -1)
+            {
+                saveFileNumber.text = $"No.{fileIndex.ToString("D3")}";
+            }
+            else
+            {
+                saveFileNumber.text = $"No.{objectIndex.ToString("D3")}" ;
+            }
         }
     }
     /// <summary>
     /// 저장화면에 보일 저장파일 생성날짜
     /// </summary>
-    private string createTime = "이천이십삼년유월십육일아홉시십분";
+    private string createTime ;
     public string CreateTime { 
         get => createTime;
         set { 
             createTime = value;
-            createTimeObj.text = createTime;
+            createTimeObj.text = $"{createTime}";
         } 
     }
     /// <summary>
     /// 저장화면에 보일 캐릭터이름
     /// </summary>
-    private string charcterName = "테스터";
-    public string CharcterName { 
-        get => charcterName;
+    private int charcterLevel = -1;
+    public int CharcterLevel { 
+        get => charcterLevel;
         set { 
-            charcterName = value;
-            charcterInfoObj.text += sceanName;
+            charcterLevel = value;
+            charcterLevelObj.text = $"Lv.{charcterLevel}";
         }
     }
 
@@ -60,58 +71,63 @@ public class SaveDataObject : SaveDataIsPool
         get => money;
         set { 
             money = value;
-            charcterInfoObj.text += $"   {money}";
+            charcterMoneyObj.text = $"$ {money}";
         }
     }
     /// <summary>
     /// 저장화면에 보일 씬정보
     /// </summary>
-    private string sceanName = "따이톨?";
-    public string SceanName {
+    private EnumList.SceanName sceanName;
+    public EnumList.SceanName SceanName {
         get => sceanName;
         set { 
             sceanName = value;
-            saveFileNameObj.text += $"   {sceanName}";
+            sceanNameObject.text = $" Map :{sceanName}";
         }
     }
     /// <summary>
     /// 오브젝트밑에 텍스트 오브젝트들 
     /// </summary>
     [SerializeField]
-    TextMeshProUGUI saveFileNameObj; // 파일이름? 
+    TextMeshProUGUI saveFileNumber; // 파일이름? 
     [SerializeField]
-    TextMeshProUGUI charcterInfoObj; // 캐릭터이름 , 저장위치 , 돈 , 레벨 정도?
+    TextMeshProUGUI sceanNameObject; // 캐릭터이름 , 저장위치 , 돈 , 레벨 정도?
     [SerializeField]
     TextMeshProUGUI createTimeObj;   // 저장시간 보여주기
+    [SerializeField]
+    TextMeshProUGUI charcterLevelObj; // 파일이름? 
+    [SerializeField]
+    TextMeshProUGUI charcterMoneyObj; // 캐릭터이름 , 저장위치 , 돈 , 레벨 정도?
+    [SerializeField]
+    TextMeshProUGUI etcObj;   // 저장시간 보여주기
+    [SerializeField]
+    GameObject isFocus;
+
+    InputKeyMouse inputSystem;
 
     /// <summary>
     /// 생성시 포지션리셋 여부 셋팅
     /// </summary>
     private void Awake()
     {
+        inputSystem = new InputKeyMouse();
         //풀에서 처리시 로컬포지션 리셋하지않게 변수셋팅
         isPositionReset = false;
-        Button bt = gameObject.AddComponent<Button>();
-        bt.onClick.AddListener( () => TestClick());
     }
 
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-
+   
+    public void InFocusObject() {
+        if (SaveLoadPopupWindow.Instance.NewIndex > -1 && SaveLoadPopupWindow.Instance.CopyCheck)
+        {
+            SaveLoadPopupWindow.Instance.OldIndex = SaveLoadPopupWindow.Instance.NewIndex;
+            SaveLoadPopupWindow.Instance.NewIndex = fileIndex;
+            SaveLoadPopupWindow.Instance.OpenPopupAction(EnumList.SaveLoadButtonList.COPY);
+        }
+        else { 
+            SaveLoadPopupWindow.Instance.NewIndex = fileIndex;
+        }
+        isFocusing = !isFocusing;
+        Debug.Log(isFocusing);
     }
     
-    
-    private void TestClick()
-    {
-        if (FileIndex > 0) {
-            Debug.Log($"{fileIndex} 번째 클릭");
-            Debug.Log($"{objectIndex} 이게오브젝트순서");
-        }
-        else{
-            Debug.Log($"{objectIndex} 이게오브젝트순서");
-        }
-
-    }
 }

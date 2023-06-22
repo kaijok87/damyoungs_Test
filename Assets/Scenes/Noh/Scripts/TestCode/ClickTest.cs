@@ -52,17 +52,17 @@ public class ClickTest : MonoBehaviour , IPointerClickHandler
 
         if (eventData.pointerEnter.CompareTag("TitleButton"))
         {
-            if (eventData.pointerEnter.gameObject.name.Equals(EnumList.TitleMenu.NewGame.ToString()))
+            if (eventData.pointerEnter.gameObject.name.Equals(EnumList.TitleMenu.NEWGAME.ToString()))
             {
               
             }
-            else if (eventData.pointerEnter.gameObject.name.Equals(EnumList.TitleMenu.Continue.ToString()))
+            else if (eventData.pointerEnter.gameObject.name.Equals(EnumList.TitleMenu.CONTINUE.ToString()))
             {
 
-                LoadingScean.SceanLoading(EnumList.SceanName.World);
+                LoadingScean.SceanLoading(EnumList.SceanName.SAVELOADTEST);
 
             }
-            else if (eventData.pointerEnter.gameObject.name.Equals(EnumList.TitleMenu.Options.ToString()))
+            else if (eventData.pointerEnter.gameObject.name.Equals(EnumList.TitleMenu.OPTIONS.ToString()))
             {
                 GameObject optionsWindow = GameObject.FindGameObjectWithTag("WindowList"). //활성화 오브젝트
                     transform.GetChild(0).gameObject; // 비활성화 오브젝트 접근
@@ -72,9 +72,9 @@ public class ClickTest : MonoBehaviour , IPointerClickHandler
                     optionsWindow.SetActive(true);
                 }
             }
-            else if (eventData.pointerEnter.gameObject.name.Equals(EnumList.TitleMenu.Exit.ToString())) 
+            else if (eventData.pointerEnter.gameObject.name.Equals(EnumList.TitleMenu.EXIT.ToString())) 
             { 
-                LoadingScean.SceanLoading(EnumList.SceanName.Ending);
+                LoadingScean.SceanLoading(EnumList.SceanName.ENDING);
             }
         }
 

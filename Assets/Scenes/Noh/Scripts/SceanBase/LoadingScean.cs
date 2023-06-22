@@ -23,16 +23,10 @@ public class LoadingScean : MonoBehaviour
     /// 다음씬으로 넘어갈 씬이름
     /// 다음씬이 입력안되면 타이틀로넘어간다.
     /// </summary>
-    static  string nextSceanName = "Title"; // 가독성높이기위해 사용하자.
+    static  EnumList.SceanName nextSceanName = EnumList.SceanName.TITLE; 
     //static int nextSceanName = 0; //성능 차이가 미미하게 더빠르다
 
-    /// <summary>
-    /// 현재 씬이름정보 프로퍼티
-    /// 저장할때 써야할거같다.
-    /// </summary>
-    public static string SceanName => nextSceanName;
-
-    /// <summary>
+     /// <summary>
     /// 로딩 진행도 이미지 종류
     /// EnumList 인터페이스에 정의해놓은 값을 참고한다.
     /// </summary>
@@ -56,11 +50,18 @@ public class LoadingScean : MonoBehaviour
     /// </summary>
     /// <param name="sceanName">이동할 씬 이름</param>
     /// <param name="type">진행 상황 표기할 progressType  EnumList의 값을확인</param>
-    public static void SceanLoading(EnumList.SceanName sceanName = EnumList.SceanName.Title, EnumList.ProgressType type = EnumList.ProgressType.Bar)
+    public static void SceanLoading(EnumList.SceanName sceanName = EnumList.SceanName.TITLE, EnumList.ProgressType type = EnumList.ProgressType.BAR)
     {
-        nextSceanName = sceanName.ToString(); 
-        progressType = type;
-        SceneManager.LoadSceneAsync("Loading");
+        if (sceanName != EnumList.SceanName.NONE) { //씬 셋팅이 되어있고
+            if (!isLoading) { //로딩이 안됬을경우 
+                isLoading = true;//로딩 시작플래그
+                nextSceanName = sceanName; //씬이름셋팅하고  
+                progressType = type; //프로그래스 타입설정 .
+                WindowList.Instance.OptionsWindow.SetActive(false); //화면전환전에 창끄기 
+                SceneManager.LoadSceneAsync((int)EnumList.SceanName.LOADING);
+            }
+        }
+        
     }
 
     /// <summary>
@@ -69,10 +70,24 @@ public class LoadingScean : MonoBehaviour
     /// </summary>
     void Start()
     {
-        isLoading = true;//로딩시작됬다고 설정
+        isLoading = true; // 로딩화면에서부터 게임시작하면 필요한 구문
+        SetDisavleObjects(); //열려있는창 닫아버리기
         StopAllCoroutines();//로딩이 연속으로 이러나는경우에 기존코루틴을 멈추고 새로시작한다.
         StartCoroutine(LoadSceanProcess());
     }
+
+
+    /// <summary>
+    /// 로딩창왔을때 열려있는창 닫아버리기위한 함수
+    /// 내용추가 필요
+    /// </summary>
+    private void SetDisavleObjects() { 
+        WindowList.Instance.OptionsWindow.SetActive(false); 
+    }
+
+
+
+
 
     /// <summary>
     /// 로딩화면에서 다음씬이 로딩이 완료됬는지 확인하기위해 처리하는작업
@@ -81,7 +96,7 @@ public class LoadingScean : MonoBehaviour
     IEnumerator LoadSceanProcess()
     {
         //비동기 씬로딩정보를 받기위해 가져오는 변수
-        AsyncOperation op = SceneManager.LoadSceneAsync(nextSceanName);
+        AsyncOperation op = SceneManager.LoadSceneAsync((int)nextSceanName);
 
         //op.allowSceneActivation 값이 true 이면 씬 로딩이 90%(0.9f)이상이 되면 자동으로 다음씬으로 넘어가진다
         op.allowSceneActivation = false;
@@ -92,9 +107,9 @@ public class LoadingScean : MonoBehaviour
         float loadingTime = 0.0f; //프로그래스바 진행시간체크
         switch (progressType)
         {
-            case EnumList.ProgressType.Bar:
+            case EnumList.ProgressType.BAR:
                 //진행바이미지 셋팅을위해 가져오기
-                progressImg = ProgressList.Instance.GetProgress(EnumList.ProgressType.Bar, transform)
+                progressImg = ProgressList.Instance.GetProgress(EnumList.ProgressType.BAR, transform)
                                 .transform.GetChild(1).GetComponent<Image>(); //Prefab 에 순서1번째로 지정해두었다  
 
                 while (!op.isDone)  //isDone 으로 다음씬 로딩이 끝낫는지 체크할수있다.

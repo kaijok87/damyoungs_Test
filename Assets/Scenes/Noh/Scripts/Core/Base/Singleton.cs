@@ -9,8 +9,9 @@ using UnityEngine.SceneManagement;
         2-1 . Awake 에서 생성될때 확인
         2-2 . 싱글톤클래스 호출시 확인
     3. 씬 변환 시 오브젝트가 초기화되니 초기화 안되게 DontDestroyOnLoad(instance.gameObject); 함수를 사용 
- 
-    4. 상속받은 클래스가 제네릭이면 AddComponent에서 자료의 형태를 찾을수가없다.
+    4. 싱글톤 상속받은 클래스에서 InputSystem 을 사용하여 OnEnable 과 OnDisable 쓸경우  
+        - Destroy 함수 실행시 OnEnable은 실행안되고  OnDisable 먼저 발동하기때문에 InputSystem 의 활성화 비활성화를 OnEnable 과 OnDisable 를사용하여 이벤트처리했다면 수정해야한다.
+    5. 상속받은 클래스가 제네릭이면 AddComponent에서 자료의 형태를 찾을수가없다.
     - 유니티에서의 싱글톤은 나중에 생성된것을 사용하는것이 낫다.?
     - 게으른 할당?
  */
@@ -23,10 +24,12 @@ public class Singleton<T> : MonoBehaviour where T : Component
     /// 이미 종료처리에 들어갔는지 확인하기 위한 변수
     /// </summary>
     private static bool isShutDown = false;
+
     /// <summary>
     /// 싱글톤의 객체
     /// </summary>
     private static T instance;
+    
     /// <summary>
     /// 싱글톤 객체를 읽기 위한 프로퍼티. 객체가 많들어지지 않았으면 새로만든다.
     /// </summary>
@@ -39,14 +42,21 @@ public class Singleton<T> : MonoBehaviour where T : Component
                 Debug.LogWarning($"{typeof(T).Name}은 이미 삭제 중이다.");
                 return null; //처리하지말라고 null을 넘긴다.
             }
-            if (instance == null)
+            if (instance == null) 
             {
-                if (FindObjectOfType<T>() == null)
+                if (FindObjectOfType<T>(true) == null)
                 { //씬에 싱글톤이있는지 확인
                     GameObject gameObj = new GameObject(); //오브젝트만들어서 
                     gameObj.name = $"{typeof(T).Name} Singleton"; //이름추가하고
                     instance = gameObj.AddComponent<T>(); //싱글톤객체에 추가하여 생성
+                    Debug.Log($"instance = {instance} 생성순서확인");
                     DontDestroyOnLoad(instance.gameObject); //씬이 사라질때 게임오브젝트가 삭제되지 안하게하는 함수
+                }
+                else
+                {
+                    Debug.Log($"FindObjectOfType<T>(true) = {FindObjectOfType<T>(true)} 가끔 여기로 빠지는것들이있다");
+                    Debug.Log("여기로빠지면 일단 비활성화된 오브젝트에 싱글톤을 추가하지않았나 확인해보라.");
+
                 }
             }
             return instance;

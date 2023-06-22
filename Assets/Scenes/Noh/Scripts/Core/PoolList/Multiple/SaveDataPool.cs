@@ -27,16 +27,19 @@ public class SaveDataPool : MultipleObjectPool<SaveDataIsPool>
     protected override void EndInitialize()
     {
         base.EndInitialize();
+
         foreach (SaveDataIsPool obj in pool) //화면전환시 초기화하고 다시꺼내기위해 추가하였다 처음시작시에도 비활성화를 한번더진행.
         {
             obj.gameObject.SetActive(false);    // 전부 비활성화
         }
-        int forCount = readyQueue.Count; // 레디큐 변동이 있는경우를 위해 포문 갯수 조절
-        for (int i = 0; i < forCount; i++) // 포문돌면서 큐를 초기화
+        int queueCount = readyQueue.Count; //큐값이 변동이 있는경우 가져와서 포문을돌린다.
+        for (int i = 0; i < queueCount; i++) //남아있는큐 초기화
         {
             SaveDataIsPool comp = readyQueue.Dequeue();      // 하나 꺼내고
             comp.gameObject.SetActive(true);                // 활성화시킨다
         }
+
+
     }
 
 
