@@ -9,6 +9,7 @@ enum TileType
     vertexTile
 }
 
+[SelectionBase]
 public class Tile : MonoBehaviour
 {
     

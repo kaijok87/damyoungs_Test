@@ -11,13 +11,12 @@ public class MapTest : TestBase
     public GameObject sideTile;             // 외곽에 배치될 타일
     public GameObject vertexTile;           // 꼭지점 타일
     public GameObject wall;                 // 벽
-
+    public GameObject cornerWall;           // 코너 벽
 
     int sizeX = 0;                          // 타일 가로 갯수
     int sizeY = 0;                          // 타일 세로 갯수
 
     public int tileCount = 0;               // 타일의 수
-    public int wallCount = 0;
 
     bool isExist = false;                   // 타일 존재 여부
 
@@ -28,9 +27,6 @@ public class MapTest : TestBase
     Vector3 startPos = new Vector3();       // 추후에 캐릭터 놓을 위치. 지금은 임시적으로 (0, 0, 0) 으로 설정
 
     GameObject[] mapTiles;                // 타일 오브젝트 객체를 담을 배열
-    List<GameObject> walls;
-    //GameObject[] walls;
-
 
     private void Start()
     {
@@ -54,11 +50,7 @@ public class MapTest : TestBase
             tileCount = sizeX * sizeY;          // 총 타일 갯수
             mapTiles = new GameObject[tileCount];   // 배열 동적 생성
 
-            wallCount = 2 * sizeX + 2 * sizeY - 4;
-            //walls = new GameObject[wallCount];      // 벽 타일 갯수 생성
-            walls = new List<GameObject>(wallCount);
-
-            GameObject wallObject;
+            GameObject wallObject;          // 벽 오브젝트
 
             for (int i = 0; i < tileCount; i++)
             {
@@ -68,40 +60,39 @@ public class MapTest : TestBase
                 // 타일 생성
                 if ((width == 0 && length == 0) || (width == 0 && length == sizeY - 1) || (width == sizeX - 1 && length == 0) || (width == sizeX - 1 && length == sizeY - 1))
                 {
+                    // 꼭지점인 경우
+                    mapTiles[i] = Instantiate(vertexTile, gameObject.transform);                // 꼭지점 타일 생성
+                    mapTiles[i].GetComponent<Tile>().Type = (int)TileType.vertexTile;           // 타일 스크립트에 타입 저장
+                    GameObject cornerObject = Instantiate(cornerWall, mapTiles[i].transform);   // 꼭지점 벽 생성
+                    wallObject = Instantiate(wall, mapTiles[i].transform);                      // 측면 벽1 생성
+                    wallObject.transform.Translate(new Vector3(1.0f, 0.0f, -1.75f));            // 측면 벽1 이동
+                    wallObject = Instantiate(wall, mapTiles[i].transform);                      // 측면 벽2 생성
+                    wallObject.transform.Rotate(new Vector3(0, -90.0f, 0));                     // 측면 벽2 회전
+                    wallObject.transform.Translate(new Vector3(1.0f, 0.0f, -1.75f));            // 측면 벽2 이동
 
-
-                    mapTiles[i] = Instantiate(vertexTile, gameObject.transform);            // 꼭지점 타일 생성
-                    mapTiles[i].GetComponent<Tile>().Type = (int)TileType.vertexTile;       // 타일 스크립트에 타입 저장
-                    wallObject = Instantiate(wall, mapTiles[i].transform);
-                    wallObject.transform.Translate(new Vector3(1.0f, 0.0f, -1.7f));
-                    //walls.Add(wallObject);
-                    wallObject = Instantiate(wall, mapTiles[i].transform);
-                    wallObject.transform.Translate(new Vector3(1.7f, 0.0f, 1.0f));
-                    //walls.Add(wallObject);
-                    if (width == 0 && length == 0)
+                    if (width == 0 && length == 0)                                      // 왼쪽 위
                     {
                         mapTiles[i].transform.Rotate(new Vector3(0, 180.0f, 0));
                     }
-                    else if (width == 0 && length == sizeY - 1)
-                    {
-                        mapTiles[i].transform.Rotate(new Vector3(0, 270.0f, 0));
-                    }
-                    else if (width == sizeX - 1 && length == 0)
+                    else if (width == 0 && length == sizeY - 1)                         // 왼쪽 아래
                     {
                         mapTiles[i].transform.Rotate(new Vector3(0, 90.0f, 0));
                     }
-                    else if (width == sizeX - 1 && length == sizeY - 1)
+                    else if (width == sizeX - 1 && length == 0)                         // 오른쪽 위
                     {
-                        mapTiles[i].transform.Rotate(new Vector3(0, 360.0f, 0));
+                        mapTiles[i].transform.Rotate(new Vector3(0, 270.0f, 0));
                     }
+                    //else if (width == sizeX - 1 && length == sizeY - 1)               // 오른쪽 아래
+                    //{
+                    //    mapTiles[i].transform.Rotate(new Vector3(0, 360.0f, 0));
+                    //}
                 }
                 else if (width == 0 || width == sizeX - 1 || length == 0 || length == sizeY - 1)              // 사이드 타일 회전
                 {
                     mapTiles[i] = Instantiate(sideTile, gameObject.transform);              // 사이드 타일 생성
                     mapTiles[i].GetComponent<Tile>().Type = (int)TileType.sideTile;         // 타일 스크립트에 타입 저장
                     wallObject = Instantiate(wall, mapTiles[i].transform);
-                    wallObject.transform.Translate(new Vector3(1, 0.0f, -1.7f));
-                    //walls.Add(wallObject);
+                    wallObject.transform.Translate(new Vector3(1, 0.0f, -1.75f));
 
                     if (width == 0)                                                             // 왼쪽 세로줄
                     {
@@ -131,16 +122,7 @@ public class MapTest : TestBase
                 mapTiles[i].transform.position = new Vector3(startPos.x - mainTileSize.x * sizeX / 2 + mainTileSize.x * width,
                                                             0, startPos.z + mainTileSize.z * sizeY - mainTileSize.z * length);
             }
-        
-            //for (int i = 0; i < wallCount; i++)
-            //{
-            //    wallObject = Instantiate(wall);
-            //    wallObject.transform.position = new Vector3(mapTiles[0].transform.position.x + 1.0f,
-            //                                                mapTiles[0].transform.position.y,
-            //                                                mapTiles[0].transform.position.z + 1.7f);
-            //    //walls.Add(wallObject);
-            //}
-
+       
             isExist = true;
         }
 
