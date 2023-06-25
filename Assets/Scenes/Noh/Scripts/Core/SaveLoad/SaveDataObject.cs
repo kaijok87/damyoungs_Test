@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,8 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 /// </summary>
 public class SaveDataObject : SaveDataIsPool
 {
-    //클릭됬을때 나 선택됬을때 체크할변수
-    bool isFocusing = false;
+  
     /// <summary>
     /// 클릭했을때 오브젝트 인덱스
     /// </summary>
@@ -105,6 +105,8 @@ public class SaveDataObject : SaveDataIsPool
 
     InputKeyMouse inputSystem;
 
+    SaveLoadPopupWindow proccessManager;
+
     /// <summary>
     /// 생성시 포지션리셋 여부 셋팅
     /// </summary>
@@ -114,20 +116,29 @@ public class SaveDataObject : SaveDataIsPool
         //풀에서 처리시 로컬포지션 리셋하지않게 변수셋팅
         isPositionReset = false;
     }
-
-   
-    public void InFocusObject() {
-        if (SaveLoadPopupWindow.Instance.NewIndex > -1 && SaveLoadPopupWindow.Instance.CopyCheck)
-        {
-            SaveLoadPopupWindow.Instance.OldIndex = SaveLoadPopupWindow.Instance.NewIndex;
-            SaveLoadPopupWindow.Instance.NewIndex = fileIndex;
-            SaveLoadPopupWindow.Instance.OpenPopupAction(EnumList.SaveLoadButtonList.COPY);
-        }
-        else { 
-            SaveLoadPopupWindow.Instance.NewIndex = fileIndex;
-        }
-        isFocusing = !isFocusing;
-        Debug.Log(isFocusing);
+    private void Start()
+    {
+        proccessManager = SaveLoadPopupWindow.Instance; //저장화면 처리하는클래스가져오기
     }
-    
+
+    public void InFocusObject() 
+    {
+        if (proccessManager.NewIndex != fileIndex) //같은 오브젝트 클릭했는지 체크
+        {
+            if (proccessManager.NewIndex > -1 && proccessManager.CopyCheck) // 카피버튼을 클릭했고 데이터가 없는것을 클릭안했는지 체크
+            {
+
+                proccessManager.OldIndex = proccessManager.NewIndex; // 카피할 데이터 번호 셋팅
+                proccessManager.NewIndex = fileIndex; //카피될 데이터 번호 셋팅
+                proccessManager.OpenPopupAction(EnumList.SaveLoadButtonList.COPY); //카피실행
+
+            }
+            else
+            {
+                SaveLoadPopupWindow.Instance.NewIndex = fileIndex; //새로클릭했으면 다시 셋팅 
+            }
+        }
+        
+    }
+
 }

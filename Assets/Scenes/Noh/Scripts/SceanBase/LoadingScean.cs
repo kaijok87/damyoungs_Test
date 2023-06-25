@@ -133,7 +133,10 @@ public class LoadingScean : MonoBehaviour
                         //로딩창이 너무빠르게 넘어가는것을 방지하기위해 페이크 타임 체크
                         if (fakeTimer < loadingTime) //에디터에서 페이크로딩시간을 조절한다.
                         {
+#if UNITY_EDITOR
                             Debug.Log(loadingTime);    //총 걸린시간 체크
+#endif
+
                             isLoading = false;//로딩끝났다고 설정
                             op.allowSceneActivation = true; //해당 변수가 true면 progress 값이 0.9(90%)값이 넘어가는순간 다음씬을 로딩한다.
                             yield break; //제어권넘기기

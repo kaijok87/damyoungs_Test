@@ -50,12 +50,20 @@ public class SaveLoadManager : Singleton<SaveLoadManager> {
     readonly string searchPattern = "SpacePirateSave???.json";
 
 
+    GameObject windowList;
+    public GameObject WindowList => windowList;
+
     /// <summary>
-    /// 풀에서 저장윈도우로 SaveData오브젝트를 넘기기위해 저장화면윈도우 게임오브젝트
-    /// 매번 접근하기 싫어서 작성.
+    /// 풀에서 저장윈도우로 SaveData오브젝트를 넘기기위한 저장화면윈도우 게임오브젝트
     /// </summary>
     GameObject saveLoadWindow;
     public GameObject SaveLoadWindow => saveLoadWindow;
+
+    /// <summary>
+    /// 풀에서 페이지윈도우로 PageObjtct 를 넘기기위한 오브젝트위치
+    /// </summary>
+    GameObject saveLoadPagingWindow;
+    public GameObject SaveLoadPagingWindow  => saveLoadPagingWindow;
 
 
     /// <summary>
@@ -101,26 +109,38 @@ public class SaveLoadManager : Singleton<SaveLoadManager> {
     public int MaxSaveDataLength => maxSaveDataLength;
 
 
+
     /// <summary>
     /// 파일 관련 처리가 진행중인지 체크하는 변수 
     /// 모든작업은 동시작업진행하면안된다.
     /// 비동기로 진행시 뚧릴 위험이 있기는하다.
     /// </summary>
-    public bool isProcessing = false;
+    bool isProcessing = false;
+
+    
     protected override void Awake()
     {
 #if UNITY_EDITOR
         Debug.LogWarning("가끔씩 순번꼬일때가있어서 체크 1번");
 #endif
         base.Awake();
-        saveLoadWindow = GameObject.FindGameObjectWithTag("WindowList").transform.
-                                GetChild(0).            //optionsWindow
-                                GetChild(0).            //OptionSettingWindow
-                                GetChild(1).            //SaveLoadWindow
-                                GetChild(1).            //SaveFileList
-                                GetChild(0).            //Scroll View
-                                GetChild(0).            //Viewport
-                                GetChild(0).gameObject; //Content
+        windowList = GameObject.FindGameObjectWithTag("WindowList");
+
+        saveLoadWindow = windowList.transform.
+                                    GetChild(0).            //optionsWindow
+                                    GetChild(0).            //OptionSettingWindow
+                                    GetChild(1).            //SaveLoadWindow
+                                    GetChild(1).            //SaveFileList
+                                    GetChild(0).            //Scroll View
+                                    GetChild(0).            //Viewport
+                                    GetChild(0).gameObject; //Content
+
+        saveLoadPagingWindow = windowList.transform.
+                                        GetChild(0).            //optionsWindow
+                                        GetChild(0).            //OptionSettingWindow
+                                        GetChild(1).            //SaveLoadWindow
+                                        GetChild(2).            //PageListAndButton
+                                        GetChild(1).gameObject; //PageNumber
     }
     
     void Start (){
