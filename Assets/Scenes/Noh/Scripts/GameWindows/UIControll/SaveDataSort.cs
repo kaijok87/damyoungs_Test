@@ -1,9 +1,7 @@
+
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 화면에 보이는것만 신경쓰자
@@ -17,167 +15,299 @@ public class SaveDataSort : MonoBehaviour
     /// </summary>
     [SerializeField]
     int pageIndex = 0;          // 현재 페이지넘버 첫번째 0번
-    public int PageIndex 
+    public int PageIndex
     {
         get => pageIndex;
         set {
-            pageIndex = value;
 
-            if( pageIndex < 0) //페이지수가 0이 첫번째이니 그보다작을순없다
+            pageIndex = value;
+            if (pageIndex < 0) //페이지수가 0이 첫번째이니 그보다작을순없다
             {
                 pageIndex = 0;
             }
             else if (value > lastPageIndex) // 페이지가 최대페이지보다많게들어오면
-            { 
+            {
                 pageIndex = lastPageIndex; //마지막페이지를 보여준다.
             }
-               
+
         }
     }
+
     /// <summary>
-    /// 페이지 계산을하여 마지막 페이지를 담아둔다.
+    /// 한페이지에 보일 페이지 오브젝트 최대 갯수
+    /// </summary>
+    [SerializeField]
+    int pageViewMaxSize = 8;
+
+    /// <summary>
+    /// 한페이지에 보일 최대 저장파일 오브젝트 최대 갯수
+    /// </summary>
+    [SerializeField]
+    int pageViewSaveObjectMaxSize = 8;
+    public int PageViewSaveObjectMaxSize => pageViewSaveObjectMaxSize;
+
+    /// <summary>
+    /// 마지막 페이지 값 
     /// </summary>
     int lastPageIndex = -1;
+    public int LastPageIndex => lastPageIndex;
 
     /// <summary>
-    /// 페이지의 마지막에 보여줄 오브젝트 갯수
+    /// 마지막페이지에 보일 저장파일 오브젝트 갯수
     /// </summary>
-    int lastPageFileViewSize = -1;
+    int lastPageObjectLength = -1;
 
     /// <summary>
-    /// 한페이지에 보일 오브젝트 갯수
+    /// 저장오브젝트 세로크기
     /// </summary>
-    [SerializeField]
-    int pageMaxSize = 8;        // 한페이지에 보일 오브젝트갯수
-    
-    /// <summary>
-    /// 저장윈도우의 오브젝트 세로크기
-    /// </summary>
-    [SerializeField]
-    float saveDataHeight = 150.0f;
+    float saveObjectHeight = 150.0f;
 
     /// <summary>
-    /// 저장윈도우 위치값 받아오기
+    /// 페이지 오브젝트 가로 간격
+    /// </summary>
+    float pageObjectWidthPadding = 95.0f;
+
+    /// <summary>
+    /// 저장윈도우 오브젝트 위치
     /// </summary>
     private GameObject saveWindowObject;
 
-  
+    /// <summary>
+    /// 저장페이지 오브젝트 위치
+    /// 페이징 처리할곳의 오브젝트 위치
+    /// </summary>
+    private GameObject saveWindowPageObject;
 
     /// <summary>
-    /// 저장윈도우 오브젝트랑 세이브데이터 미리접근해서 가져오고
-    /// 저장기능, 삭제기능, 복사기능 발동시 화면 리로드 기능을 사용하기위해 액션을 연결해준다.
-    /// 화면전환시 다시발동안됨
+    /// 저장로직실행시 팝업윈도우 위치
+    /// </summary>
+    private SaveLoadPopupWindow saveLoadPopupWindow;
+
+    /// <summary>
+    /// 화면전환시 다시발동안됨 확인완료.
+    /// OnEnable 보다 늦게 실행된다.
     /// </summary>
     private void Start()
     {
-        saveWindowObject = SaveLoadManager.Instance.SaveLoadWindow; //저장파일오브젝트들이 담길 오브젝트 위치 //Awake 에서 못찾는다.
-        
-        //saveDatas = SaveLoadManager.Instance.SaveDataList; //저장데이터가져오기 비동기하면 스타트타이밍에 못가져옴
-        // 저장시 저장한위치의 오브젝트가 저장한내용으로 변환을시켜줘야함 리로드
+#if UNITY_EDITOR
+        Debug.Log("실행위치 : Start   - 스타트 테스트 처음시작시 OnEnable 보다 느리다");
+#endif
+        //싱글톤 설정때매 Awake 에서 못찾는다. 
+        saveWindowObject = SaveLoadManager.Instance.SaveLoadWindow;
+        saveWindowPageObject = SaveLoadManager.Instance.SaveLoadPagingWindow;
+        saveLoadPopupWindow = SaveLoadPopupWindow.Instance.GetComponent<SaveLoadPopupWindow>();
 
-        SaveLoadManager.Instance.saveObjectReflash += SetGameObject;
+        //델리게이트 연결 
+        SaveLoadManager.Instance.saveObjectReflash += SetGameObject; //기능실행시 오브젝트을 다시그린다.
         SaveLoadManager.Instance.isDoneDataLoaing += SetGameObjectList; //데이터 비동기로 처리시 끝나면 화면리셋 자동으로 해주기위해 추가
+        saveLoadPopupWindow.focusInChangeFunction += SetFocusView; //저장버튼클릭시 처리하는 함수연결
 
+        InitLastPageIndex(); //페이징에 사용될 초기값셋팅
         InitSaveObjects(); //저장화면 초기값셋팅
-        SetLastPageIndex(); //페이징에 사용될 초기값셋팅
-        SaveLoadManager.Instance.isDoneDataLoaing += SetGameObjectList;
     }
-    
+
     /// <summary>
     /// 활성화시 풀에서 생성된 여분의 오브젝트를 숨기는기능추가
+    /// Start함수보다 빨리실행된다.
     /// </summary>
     private void OnEnable()
     {
-        if (saveWindowObject != null) { //맨처음 초기화할때는 자동으로 실행되니 이후 활성화시에만 체크하자.
-            SetPoolBug(pageMaxSize,saveWindowObject.transform.childCount);
-            if (saveWindowObject.activeSelf) {//오브젝트가 활성화되야 접근이가능하기때문에 체크하자
-                
-                SetGameObjectList(SaveLoadManager.Instance.SaveDataList); //초기화 작업때 비동기로 파일데이터를 읽어오기때문에 셋팅이안됬을수도있다 
-            }
+#if UNITY_EDITOR
+        Debug.Log("실행위치 : OnEnable   -  순번 체크 테스트 처음시작시 OnEnable 이 Start보다 빠르다.");
+#endif
+        if (saveWindowObject != null) { //스타트함수보다 빨리실행되서 처음열때 오류가 발생한다.
+            SetGameObjectList(SaveLoadManager.Instance.SaveDataList); //초기화 작업때 비동기로 파일데이터를 읽어오기때문에 셋팅이안됬을수도있다 
         }
-        
     }
-    
+
     /// <summary>
-    /// 풀에서 2배씩늘리기때문에 안쓰는파일이 생긴다 그것들을 비활성화 하는 작업.
+    /// 현재 페이지에서 화면에 보여줄 저장파일 오브젝트 갯수를 반환한다.
     /// </summary>
-    /// <param name="startIndex">시작 인덱스</param>
-    /// <param name="lastIndex">끝 인덱스</param>
-    private void SetPoolBug(int startIndex , int lastIndex)
+    /// <returns>현재페이지의 저장오브젝트갯수</returns>
+    private int GetGameObjectLength()
     {
-        for (int i = startIndex; i < lastIndex; i++)//안쓰는 파일만큼만 돌린다.
-        {
-            saveWindowObject.transform.GetChild(i).gameObject.SetActive(false); //안쓰는파일 숨기기 
-        }
+        return pageIndex > lastPageIndex ? lastPageObjectLength : pageViewSaveObjectMaxSize;
     }
+
+   
+    /// <summary>
+    /// 파일 인덱스로 현재 화면에 어느오브젝트에 보여줘야되는지 오브젝트 위치를 반환한다.
+    /// 저장오브젝트 넘버(0 ~ pageMaxSize) =  저장파일번호(0 ~ 설정한최대값) - (페이지넘버(설정값) 0번부터시작 * 한페이지에 보이는 갯수 ) 
+    /// </summary>
+    /// <param name="fileIndex">파일인덱스</param>
+    /// <returns>현재 페이지의 오브젝트 인덱스</returns>
+    private int GetGameObjectIndex(int fileIndex)
+    {
+        return fileIndex - (pageIndex * pageViewSaveObjectMaxSize);
+    }
+
 
     /// <summary>
     /// 파일최대갯수 와 현재 페이지에 보이는 오브젝트갯수 를 가지고 최종페이지수와 마지막페이지에 보여질 오브젝트갯수를 가져온다.
     /// </summary>
-    private void SetLastPageIndex() {
-        lastPageIndex = (SaveLoadManager.Instance.MaxSaveDataLength / pageMaxSize) + 1;  //페이지 갯수 가져오기
-        lastPageFileViewSize = SaveLoadManager.Instance.MaxSaveDataLength % pageMaxSize; //마지막 페이지에 보여줄 오브젝트갯수 가져오기
+    private void InitLastPageIndex()
+    {
+        lastPageIndex = (SaveLoadManager.Instance.MaxSaveDataLength / pageViewSaveObjectMaxSize);  //페이지 갯수 가져오기
+        lastPageObjectLength = (SaveLoadManager.Instance.MaxSaveDataLength & pageViewSaveObjectMaxSize); //마지막페이지에 보여줄 오브젝트 갯수
+    }
+
+    /// <summary>
+    /// 1. 풀에서 생성된 오브젝트가 갯수에 맞춰서 생성되지않기때문(풀에서 두배로 늘리는작업)에 작업이 추가 - 나중에 풀을 수정해야될듯하다.
+    /// 2. 풀에서 생성된 오브젝트중에 안쓰는 부분은 감춰주는 작업
+    /// </summary>
+    private void InitSaveObjects()
+    {
+        //페이징
+        int childCount = saveWindowPageObject.transform.childCount; //현재 풀에서 생성된 오브젝트 갯수 를 가져온다. (페이징)
+        int proccessLength = GetGameObjectLength(); //현재페이지의 페이징오브젝트 갯수를 가져온다.
+        if (childCount < proccessLength)//생성된 오브젝트가 화면에 보여질 갯수보다 작을경우 
+        {
+            PoolBugFunction(saveWindowPageObject.transform, childCount, proccessLength, EnumList.MultipleFactoryObjectList.SAVEPAGEBUTTONPOOL);//부족한부분가져와서 필요없는부분감추기
+        }
+
+        childCount = saveWindowObject.transform.childCount; //현재 풀에서 생성된 오브젝트 갯수 를 가져온다. (저장오브젝트)
+        proccessLength = GetGameObjectLength(); //현재페이지의 저장오브젝트 갯수를 가져온다.
+        if (childCount < proccessLength)//생성된 오브젝트가 화면에 보여질 갯수보다 작을경우 
+        {
+            PoolBugFunction(saveWindowObject.transform, childCount, proccessLength, EnumList.MultipleFactoryObjectList.SAVEDATAPOOL);//부족한부분가져와서 필요없는부분감추기
+        }
+
+        for (int i = 0; i < proccessLength; i++)//한페이지만큼만 돌린다
+        {
+            saveWindowObject.transform.GetChild(i).localPosition = new Vector3(0, -(saveObjectHeight * i), 0);// 창위치 잡아주기 
+        }
+        SetListWindowSize(proccessLength);//저장화면 크기조절
+
+        SetPageList();//페이징 데이터 화면에뿌리기
+    }
+
+    /// <summary>
+    /// 풀에서 생성된 오브젝트 에서 부족한부분 추가하고 필요없는 것들 비활성화하는 함수 호출
+    /// </summary>
+    /// <param name="position">풀의 생성위치로 잡힌 오브젝트</param>
+    /// <param name="childCount">풀에서 생성된 오브젝트 갯수</param>
+    /// <param name="proccessLength">필요한 오브젝트 갯수</param>
+    /// <param name="type">생성할 오브젝트 타입</param>
+    private void PoolBugFunction(Transform position, int childCount, int proccessLength, EnumList.MultipleFactoryObjectList type) {
+
+        for (int i = childCount; i < proccessLength; i++) //필요한만큼 추가로 생성한다 
+        {
+            MultipleObjectsFactory.Instance.GetObject(type);//오브젝트 추가해서 강제로 풀의사이즈를늘린다.
+        }
+        SetPoolBug(position, proccessLength);//필요없는 오브젝트를 비활성화 하는 함수
+    }
+
+    /// <summary>
+    /// 풀에서 2배씩늘리기때문에 안쓰는파일이 생긴다 그것들을 비활성화 하는 작업.
+    /// </summary>
+    /// <param name="position">초기화할 위치</param>
+    /// <param name="startIndex">시작 인덱스</param>
+    private void SetPoolBug(Transform position, int startIndex)
+    {
+        int lastIndex = position.childCount;// 생성된후에 추가된 갯수를 다시넘긴다.
+        for (int i = 0; i < lastIndex; i++) {
+            position.GetChild(i).gameObject.SetActive(true); //오브젝트 활성화해서 일단 전부보여준뒤
+        }
+        for (int i = startIndex; i < lastIndex; i++)//안쓰는 파일만큼만 돌린다.
+        {
+            position.GetChild(i).gameObject.SetActive(false); //안쓰는파일 숨기기 
+        }
+        int pageLength = lastIndex - startIndex < 1 ? lastIndex : lastIndex - startIndex; // 페이지가 라스트 페이지냐 아니냐에따라 값이달라져야해서 연산처리
+        SetListWindowSize(pageLength); //페이지 크기조절 
     }
 
 
     /// <summary>
-    /// 저장화면에 보일만큼 오브젝트풀이용하여 데이터오브젝트 생성하여 나열하는 함수
+    /// 저장데이터 리스트의 윈도우 크기를 설정한다.
     /// </summary>
-    private void InitSaveObjects() {
-
-        int childCount = saveWindowObject.transform.childCount;
-        //pageMaxSize 만큼 화면에 보일 오브젝트를 생성해서 가져온다.
-        if (childCount> 0) 
-        { //정상적으로 초기화됬을때 풀에서 생성하여 0개이상이된다.
-            if (childCount < pageMaxSize)
-            {// 초기화때 생성된 오브젝트수보다 페이지 최대출력 갯수가 크면 
-                for (int i = childCount; i < pageMaxSize; i++) //부족한만큼 가져온다.
-                {
-                    MultipleObjectsFactory.Instance.GetObject(EnumList.MultipleFactoryObjectList.SAVEDATAPOOL); // 풀을 늘리기위해 겟사용  자동풀증가
-                }
-
-            }
-        }
-
-        SetPoolBug(pageMaxSize , saveWindowObject.transform.childCount);//2배씩늘어나는것중안쓰는거 비활성화
-        
-        for (int i = 0; i < pageMaxSize; i++)//한페이지만큼만 돌린다
-        {
-            saveWindowObject.transform.GetChild(i).localPosition = new Vector3(0, -(saveDataHeight * i), 0);// 창위치 잡아주기 
-            SetGameObject(null, i);//초기데이터 셋팅 (*초기값 셋팅이라 무조건 0페이지부터 시작하기때문에 문제없다.*)
-        }
-        
+    private void SetListWindowSize(int fileLength) {
         //트랜스폼을 변경해봤지만 사이즈델타값이 최종적으로바껴서 사이즈델타를 수정하였다.
         saveWindowObject.GetComponent<RectTransform>().sizeDelta = // 사이즈델타에 Vector2로 값을 넣으면 사이즈가 조절된다. 
                 new Vector2(saveWindowObject.GetComponent<RectTransform>().rect.width, //기본사이즈 
-                saveDataHeight * pageMaxSize); //한페이지 에 보일 페이지크기 정하기
+                saveObjectHeight * fileLength); //한페이지 에 보일 페이지크기 정하기
     }
 
     /// <summary>
-    /// 저장하거나 삭제하거나 복사하거나 할때 특정오브젝트 리로드 기능 
-    /// 수정되는 인덱스값을 넣어주면된다
+    /// 한페이지에 보이는 오브젝트들의 데이터를 다시셋팅한다.
+    /// <param name="saveDataList">화면에 뿌릴 데이터리스트</param>
+    /// </summary>
+    private void SetGameObjectList(JsonGameData[] saveDataList)
+    {
+        if (saveDataList == null)
+        { // 읽어온 파일정보가없는경우 리턴
+            Debug.Log("초기화?");
+            return;
+        }
+        int startIndex = pageIndex * pageViewSaveObjectMaxSize; //페이지시작오브젝트위치값 가져오기
+
+        int lastIndex = (pageIndex + 1) * pageViewSaveObjectMaxSize > SaveLoadManager.Instance.MaxSaveDataLength ? //파일리스트 최대값 < 현재페이징값 * 화면에보여지는최대오브젝트수
+                            SaveLoadManager.Instance.MaxSaveDataLength : //마지막페이지면 남은갯수만 셋팅
+                            (pageIndex + 1) * pageViewSaveObjectMaxSize; //아니면 일반적인 페이징 
+
+        for (int i = startIndex; i < lastIndex; i++)
+        { //데이터를 한페이지만큼만 확인한다.
+            SetGameObject(saveDataList[i], i); // 데이터를 셋팅하자 
+        }
+        int visibleEndIndex = lastIndex - startIndex; //페이지의 마지막 인덱스값을 준다.
+        SetPoolBug(saveWindowObject.transform, visibleEndIndex);//풀은 오브젝트를 2배씩늘리는데 사용안하는것들은 비활성화작업이필요해서 추가했다.
+
+    }
+
+    /// <summary>
+    /// ==미완성==
+    /// 값이 셋팅되야한다 
+    /// lastPageIndex = 페이지 총갯수-1개 
+    /// pageMaxSize = 한페이지에 보이는갯수
+    /// 두값이 셋팅이되면 현재 페이지 기준으로 화면에 맨처음값을 반환한다.
+    /// 해당함수는 pageMaxSize < lastPageIndex // 일때만 사용된다 일단 기본값 8로 설정하면 문제없음.
+    /// 기능더추가할려면 내용수정해야함.
+    /// </summary>
+    /// <param name="viewLength">화면에 보일 페이지갯수</param>
+    /// <returns>for문의 0번째에 셋팅될 값</returns>
+    private int GetStartIndex(int viewLength)
+    {
+        int returnNum = 0; //반환값 이자 초기값 반절이상이안넘어가면 0을반환한다.
+        int halfPageNum = viewLength / 2; //페이지의 반절
+        int addPage = viewLength % 2; //이값으로 홀수와짝수를 구분하자
+        if (pageIndex >= halfPageNum + addPage) // 현재페이지가 페이지의반절값(한페이지에보이는 갯수가 홀수면 +1) 보다 같거나 클때 
+        { // 페이지가 중간값을 넘어갈때                      
+            if (pageIndex + halfPageNum >= lastPageIndex) //마지막리스트(현재페이지+ 페이지의반절값)값이 페이지 최대값보다 같거나 클때 
+            {
+                returnNum = lastPageIndex - viewLength + 1; //마지막페이지에 근접할때 처리될값
+            }
+            else
+            {
+                returnNum = pageIndex - halfPageNum + (1 - addPage); // 중간페이지 일때 처리될값
+            }
+
+        }
+        return returnNum + 1; //페이지는 0부터 가아니라 1부터 보여야하기때문에 +1
+    }
+
+    /// <summary>
+    /// 파일인덱스를 넣으면 해당오브젝트를 다시그린다.
+
     /// </summary>
     /// <param name="saveData">수정된 저장데이터</param>
     /// <param name="index">수정된 인덱스</param>
     public void SetGameObject(JsonGameData saveData, int fileIndex) {
 
-        int viewObjectNumber = fileIndex - (pageIndex * pageMaxSize); //페이지별 오브젝트 위치찾기
-        //저장오브젝트 넘버(0 ~ pageMaxSize) =  저장파일번호(0 ~ 설정한최대값) - (페이지넘버(설정값) 0번부터시작 * 한페이지에 보이는 갯수 ) 
+        int viewObjectNumber = GetGameObjectIndex(fileIndex); //페이지별 오브젝트 위치찾기
 
         SaveDataObject sd = saveWindowObject.transform.GetChild(viewObjectNumber).GetComponent<SaveDataObject>(); //수정된 오브젝트 가져온다.
 
         sd.ObjectIndex = viewObjectNumber; //오브젝트 넘버링을 해준다 
 
         if (saveData != null) { //저장데이터가 있는지 체크
-            
+
             //밑으로는 데이터 셋팅 프로퍼티 Set 함수에 화면에 보여주는 기능넣어놨다.
             //보이는기능수정시 SaveDataObject 클래스수정.
-            sd.FileIndex = saveData.DataIndex; 
+            sd.FileIndex = saveData.DataIndex;
             sd.name = saveData.CharcterInfo[0].CharcterName; //오브젝트가 바뀐건지 확인용
             sd.CreateTime = saveData.SaveTime;
             sd.Money = saveData.CharcterInfo[0].Money;
             sd.SceanName = saveData.SceanName;
-        }   
+        }
         else
         {
             //기본값 셋팅
@@ -189,31 +319,64 @@ public class SaveDataSort : MonoBehaviour
         }
     }
 
-
     /// <summary>
-    /// 한페이지에 보이는 오브젝트들의 데이터를 다시셋팅한다.
-    /// <param name="saveDataList">화면에 뿌릴 데이터리스트</param>
+    /// 페이지 숫자를 재나열한다.
     /// </summary>
-    public void SetGameObjectList(JsonGameData[] saveDataList)
-    {
-        if (saveDataList == null)
-        { // 읽어온 파일정보가없는경우 리턴
-            Debug.Log("초기화?");
-            return;
+    public void SetPageList(int index = -1) {
+        if (index > -1) PageIndex = index;
+        SetGameObjectList(SaveLoadManager.Instance.SaveDataList); // 파일리스트 보여주기
+
+        int viewLength = GetGameObjectLength(); //한화면에 보여줄 페이지갯수 
+
+        int startIndex = GetStartIndex(viewLength); // 페이징처리후 처음 표시할값을 가져온다 
+
+        for (int i = 0; i < viewLength; i++) { //한페이지 다시돌면서 셋팅한다
+            RectTransform tempRect = saveWindowPageObject.transform.GetChild(i).GetComponent<RectTransform>(); // 오브젝트의 위치정보를가져오고
+            Vector3 tempX = tempRect.anchoredPosition; //anchoredPosition 값을 수정해야 위치값이 바뀐다.
+            tempX.x = pageObjectWidthPadding * (i + 1);  //패딩간격만큼 균등하게 나열
+            tempRect.anchoredPosition = tempX; // 위치 셋팅 
+            saveWindowPageObject.transform.GetChild(i).GetComponent<SavePageButtonIsPool>().PageIndex = startIndex + i; //페이지 인덱스값 표시
         }
-        int startIndex = pageIndex * pageMaxSize; //페이지시작오브젝트위치값 가져오기
-
-        int lastIndex = (pageIndex + 1) * pageMaxSize > SaveLoadManager.Instance.MaxSaveDataLength ? //파일리스트 최대값 < 현재페이징값 * 화면에보여지는최대오브젝트수
-                            SaveLoadManager.Instance.MaxSaveDataLength : //마지막페이지면 남은갯수만 셋팅
-                            (pageIndex + 1) * pageMaxSize; //아니면 일반적인 페이징 
-
-        for (int i = startIndex; i < lastIndex; i++)
-        { //데이터를 한페이지만큼만 확인한다.
-            SetGameObject(saveDataList[i], i); // 데이터를 셋팅하자 
-        }
-        int visibleEndIndex = lastIndex - startIndex; //페이지의 마지막 인덱스값을 준다.
-        SetPoolBug(visibleEndIndex, saveWindowObject.transform.childCount);//풀은 오브젝트를 2배씩늘리는데 사용안하는것들은 비활성화작업이필요해서 추가했다.
-
+        ResetSaveFocusing();//페이지이동시 초기화
     }
 
+    /// <summary>
+    /// 세이브파일 포커싱 리셋하기 
+    /// </summary>
+    public void ResetSaveFocusing() {
+        int initLength = GetGameObjectLength();
+        for (int i = 0; i < initLength; i++)
+        {
+            saveWindowObject.transform.GetChild(i).GetComponent<Image>().color = Color.black;
+        }
+    }
+
+    /// <summary>
+    /// 세이브 파일 포커싱 하기
+    /// </summary>
+    /// <param name="fileIndex">선택한 파일 인덱스</param>
+    /// <param name="isCopy">현재 복사상태인지확인</param>
+    public void SetFocusView(int fileIndex,bool isCopy)
+    {
+        if (fileIndex > -1) //선택파일이 제대로된 데이터가있는경우 
+        {
+            int pageIndexObejct = GetGameObjectIndex(fileIndex); //게임오브젝트위치가져오기
+            if (!isCopy) //복사가 아닌경우 
+            {
+                ResetSaveFocusing(); //기존 포커싱 해제하고
+                saveWindowObject.transform.GetChild(pageIndexObejct).GetComponent<Image>().color = Color.white; //새로 포커싱
+            }
+            else // 복사상태인경우
+            {
+                if (saveLoadPopupWindow.OldIndex == saveLoadPopupWindow.NewIndex)
+                { //저장버튼 눌렀을시에 같은값을 가지고 이리온다.
+                    saveWindowObject.transform.GetChild(GetGameObjectIndex(saveLoadPopupWindow.OldIndex)).GetComponent<Image>().color = Color.red;
+                }
+                else //저장버튼누른후 파일을 선택할시  
+                {
+                    saveWindowObject.transform.GetChild(GetGameObjectIndex(saveLoadPopupWindow.NewIndex)).GetComponent<Image>().color = Color.blue;
+                }
+            }
+        } 
+    }
 }

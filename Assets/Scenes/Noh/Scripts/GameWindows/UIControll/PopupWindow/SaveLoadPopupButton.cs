@@ -9,6 +9,9 @@ public class SaveLoadPopupButton : MonoBehaviour
     /// 팝업창 위치찾기
     /// </summary>
     GameObject parentPopupWindow;
+
+    SaveDataSort proccessClass;
+
     /// <summary>
     /// 어떤 팝업인지 타입설정
     /// </summary>
@@ -26,6 +29,7 @@ public class SaveLoadPopupButton : MonoBehaviour
     private void Awake()
     {
         parentPopupWindow = SaveLoadPopupWindow.Instance.transform.GetChild(1).gameObject; //팝업창 위치 찾기
+        proccessClass = WindowList.Instance.transform.GetChild(0).GetChild(0).GetChild(1).gameObject.GetComponent<SaveDataSort>();//초기화때 필요한 함수불러오기위해 사용  
     }
     private void OnEnable()//팝업창활성화시 
     {
@@ -40,6 +44,7 @@ public class SaveLoadPopupButton : MonoBehaviour
         selectIndex = -1;
         oldSelectIndex = -1;
         type = EnumList.SaveLoadButtonList.NONE;
+        proccessClass.ResetSaveFocusing();
     }
 
     public void CancelButton()

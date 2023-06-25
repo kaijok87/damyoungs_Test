@@ -72,7 +72,8 @@ namespace EnumList
 	public enum MultipleFactoryObjectList
 	{
 		SAVEDATAPOOL = 0, //저장화면에 보여줄 오브젝트생산용 풀
-	}
+        SAVEPAGEBUTTONPOOL,
+    }
 
 
 	public enum UniqueFactoryObjectList 
