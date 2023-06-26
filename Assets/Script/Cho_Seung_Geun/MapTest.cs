@@ -11,7 +11,6 @@ public class MapTest : TestBase
     public GameObject sideTile;             // 외곽에 배치될 타일
     public GameObject vertexTile;           // 꼭지점 타일
     public GameObject wall;                 // 벽
-    public GameObject cornerWall;           // 코너 벽
 
     int sizeX = 0;                          // 타일 가로 갯수
     int sizeY = 0;                          // 타일 세로 갯수
@@ -27,6 +26,10 @@ public class MapTest : TestBase
     Vector3 startPos = new Vector3();       // 추후에 캐릭터 놓을 위치. 지금은 임시적으로 (0, 0, 0) 으로 설정
 
     GameObject[] mapTiles;                // 타일 오브젝트 객체를 담을 배열
+
+
+    public GameObject player;
+
 
     private void Start()
     {
@@ -63,12 +66,16 @@ public class MapTest : TestBase
                     // 꼭지점인 경우
                     mapTiles[i] = Instantiate(vertexTile, gameObject.transform);                // 꼭지점 타일 생성
                     mapTiles[i].GetComponent<Tile>().Type = (int)TileType.vertexTile;           // 타일 스크립트에 타입 저장
-                    GameObject cornerObject = Instantiate(cornerWall, mapTiles[i].transform);   // 꼭지점 벽 생성
+
                     wallObject = Instantiate(wall, mapTiles[i].transform);                      // 측면 벽1 생성
                     wallObject.transform.Translate(new Vector3(1.0f, 0.0f, -1.75f));            // 측면 벽1 이동
                     wallObject = Instantiate(wall, mapTiles[i].transform);                      // 측면 벽2 생성
                     wallObject.transform.Rotate(new Vector3(0, -90.0f, 0));                     // 측면 벽2 회전
                     wallObject.transform.Translate(new Vector3(1.0f, 0.0f, -1.75f));            // 측면 벽2 이동
+                    wallObject = Instantiate(wall, mapTiles[i].transform);                      // 꼭지점 벽 생성
+                    wallObject.transform.Rotate(new Vector3(0, -45.0f, 0));                     // 꼭지점 벽 회전
+                    wallObject.transform.Translate(new Vector3(1.0f, 0.0f, -2.0f));             // 꼭지점 벽 이동
+
 
                     if (width == 0 && length == 0)                                      // 왼쪽 위
                     {
@@ -87,8 +94,9 @@ public class MapTest : TestBase
                     //    mapTiles[i].transform.Rotate(new Vector3(0, 360.0f, 0));
                     //}
                 }
-                else if (width == 0 || width == sizeX - 1 || length == 0 || length == sizeY - 1)              // 사이드 타일 회전
+                else if (width == 0 || width == sizeX - 1 || length == 0 || length == sizeY - 1)              
                 {
+                    // 사이드 타일 생성 및 회전
                     mapTiles[i] = Instantiate(sideTile, gameObject.transform);              // 사이드 타일 생성
                     mapTiles[i].GetComponent<Tile>().Type = (int)TileType.sideTile;         // 타일 스크립트에 타입 저장
                     wallObject = Instantiate(wall, mapTiles[i].transform);
@@ -122,8 +130,10 @@ public class MapTest : TestBase
                 mapTiles[i].transform.position = new Vector3(startPos.x - mainTileSize.x * sizeX / 2 + mainTileSize.x * width,
                                                             0, startPos.z + mainTileSize.z * sizeY - mainTileSize.z * length);
             }
-       
-            isExist = true;
+
+            player.transform.position = GetTile(sizeX / 2 + 1, sizeY).transform.position;       // 플레이어 위치 이동
+
+            isExist = true;         // 중복 맵 생성 방지
         }
 
     }
@@ -140,5 +150,17 @@ public class MapTest : TestBase
 
 
         isExist = false;
+    }
+
+    /// <summary>
+    /// 이차원 좌표를 타일로 반환하는 함수
+    /// </summary>
+    /// <param name="가로 인덱스"></param>
+    /// <param name="세로 인덱스"></param>
+    /// <returns></returns>
+    GameObject GetTile(int width, int length)
+    {
+        int index = sizeX * (length - 1) + width - 1;
+        return mapTiles[index];
     }
 }
