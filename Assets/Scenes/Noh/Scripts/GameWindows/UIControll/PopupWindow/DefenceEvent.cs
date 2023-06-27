@@ -16,7 +16,8 @@ public class DefenceEvent: MonoBehaviour
     private void Awake()
     {
         inputSystem = new InputKeyMouse();//esc이벤트 추가할 컨트롤러
-        targetWindow = transform.parent.GetChild(1).GetChild(5).GetComponent<SaveLoadPopupButton>();// esc눌렀을때 처리할 종료 process 실행클래스 
+        int index = transform.parent.childCount - 1;
+        targetWindow = transform.parent.GetChild(index).GetChild(5).GetComponent<SaveLoadPopupButton>();// esc눌렀을때 처리할 종료 process 실행클래스 
     }
     private void OnEnable()
     {
