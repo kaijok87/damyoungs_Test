@@ -16,7 +16,7 @@ public class SaveLoadPopupWindow : Singleton<SaveLoadPopupWindow>
     GameObject deleteButton;
     TextMeshProUGUI windowText;
 
-    
+    Transform proccessPopup;
     public Action<int,bool> focusInChangeFunction;
 
     /// <summary>
@@ -80,11 +80,13 @@ public class SaveLoadPopupWindow : Singleton<SaveLoadPopupWindow>
     protected override void Awake()
     {
         base.Awake();
-        saveButton = transform.GetChild(1).GetChild(1).gameObject;
-        loadButton = transform.GetChild(1).GetChild(2).gameObject;
-        copyButton = transform.GetChild(1).GetChild(3).gameObject;
-        deleteButton = transform.GetChild(1).GetChild(4).gameObject;
-        windowText = transform.GetChild(1).GetChild(6).GetComponent<TextMeshProUGUI>();
+        int savePopupIndex = transform.childCount - 1;
+        proccessPopup = transform.GetChild(savePopupIndex);
+        saveButton =    proccessPopup.GetChild(1).gameObject;
+        loadButton =    proccessPopup.GetChild(2).gameObject;
+        copyButton =    proccessPopup.GetChild(3).gameObject;
+        deleteButton =  proccessPopup.GetChild(4).gameObject;
+        windowText =    proccessPopup.GetChild(6).GetComponent<TextMeshProUGUI>();
     }
     /// <summary>
     /// 처리로직 
@@ -109,10 +111,12 @@ public class SaveLoadPopupWindow : Singleton<SaveLoadPopupWindow>
                     break;
             }
             windowText.text = $"{type} 하시겠습니까 ?";
-            transform.GetChild(1).gameObject.SetActive(true);
+            proccessPopup.gameObject.SetActive(true); //키이벤트 클릭이벤트 막는 창띄우기
         }
     }
 
-
+    public void AllClosePopup() { 
+        
+    }
    
 }
